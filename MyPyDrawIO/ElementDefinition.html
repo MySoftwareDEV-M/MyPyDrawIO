@@ -58,7 +58,17 @@
                     <h1 class="modulename">
 <a href="./../MyPyDrawIO.html">MyPyDrawIO</a><wbr>.ElementDefinition    </h1>
 
-                
+                        <div class="docstring"><p>When loading a <a href="./Library.html#Library">Library</a> the Library will create an ElementDefinition for each element within the library file as described <a href="../MyPyDrawIO.html#libraries">here</a>.
+The Library lists all titles of the elements. The ElementDefinitions can be retrieved by their titles.</p>
+
+<p>An ElementDefinition contains the definition of a <a href="./Vertex.html#Vertex">Vertice</a> or <a href="./Edge.html#Edge">Edge</a>.
+These elements can be simple (just one mxCell or object) or complex (a more or less big parent child structure).</p>
+
+<p>To create an element just forwarded the ElementDefinition to the <a href="./Page.html#Page.createVertex">createVertex()</a> or <a href="./Page.html#Page.createEdge">createEdge()</a> function of the Page.
+These functions will return the created elements, which can be further manipulated by you.
+Keep in mind, these elements can be complex.</p>
+</div>
+
                 
                 
                 
@@ -73,26 +83,7 @@
     </div>
     <a class="headerlink" href="#ElementDefinition"></a>
     
-            <div class="docstring"><p>When loading a <a href="./Library.html#Library">Library</a> the Library will create an ElementDefinition for each element within the library file as described <a href="../MyPyDrawIO.html#libraries">here</a>.
-The Library lists all titles of the elements. The ElementDefinitions can be retrieved by their titles.</p>
-
-<p>An ElementDefinition contains the definition of a <a href="./Vertex.html#Vertex">Vertice</a> or <a href="./Edge.html#Edge">Edge</a>.
-These elements can be simple (just one mxCell or object) or complex (a more or less big parent child structure).</p>
-
-<p>To create an element just forwarded the ElementDefinition to the <a href="./Page.html#Page.createVertex">createVertex()</a> or <a href="./Page.html#Page.createEdge">createEdge()</a> function of the Page.
-These functions will return the created elements, which can be further manipulated by you.
-Keep in mind, these elements can be complex.</p>
-
-<p>NOCH ÜBERLEGEN, OB ICH DIESE TECHNISCHEN ERLÄUTERUNGEN HIER BEHALTE.
-If the ElementDefinition represents a complex element with parents and children <a href="../MyPyDrawIO.html#libraries">see here</a>,
-all the children are also created and added as children to the respective parent.</p>
-
-<p>If the content is a xml, the xml contains the definition of the specific element only. 
-As described <a href="../MyPyDrawIO.html#parent-child-relationship">here</a> within the xml the parent child relationship 
-is realized by references. So it is in the responsibility of the Page to setup all elements
-with the correct parent child relationship.</p>
-</div>
-
+    
 
                             <div id="ElementDefinition.parse" class="classattr">
                                 <div class="attr function">

@@ -34,9 +34,6 @@
                     <a class="class" href="#Libraries">Libraries</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="function" href="#Libraries.__init__">Libraries</a>
-                        </li>
-                        <li>
                                 <a class="function" href="#Libraries.library">library</a>
                         </li>
                         <li>
@@ -64,7 +61,67 @@
                     <h1 class="modulename">
 <a href="./../MyPyDrawIO.html">MyPyDrawIO</a><wbr>.Libraries    </h1>
 
-                
+                        <div class="docstring"><p>Libraries is a
+<a href="https://en.wikipedia.org/wiki/Singleton_pattern">singleton</a>
+to load draw.io libraries (xml files).</p>
+
+<p>For each loaded library a
+<a href="./Library.html#Library">library</a>
+object will be provided.
+These provide access to the 
+<a href="./Vertex.html">vertices</a> and
+<a href="./Edge.html">edges</a>
+as an
+<a href="./ElementDefinition.html">ElementDefinition</a>. 
+Forward them to the
+<a href="./Page.html#Page.createVertex">Page.createVertex()</a> and
+<a href="./Page.html#Page.createEdge">Page.createEdge()</a>
+functions.</p>
+
+<p>Adapt this code example to use your own libraries.
+To provide a suitable draw.io library, see
+<a href="../MyPyDrawIO.html#creating-drawio-libraries-for-mypydrawio">Creating draw.io libraries for MyPyDrawIO</a>.</p>
+
+<pre><code>###################################################################################################
+# Libraries
+libraries = Libraries.Libraries()
+
+# access main library
+libraries.loadLibrary("./Libraries/MainLibrary.xml")
+mainlibrary = libraries.library("MainLibrary")
+
+# print content of main library
+print("Vertices provided by MainLibrary")
+for vertex in mainlibrary.vertices():
+    print(" - " + vertex)
+
+print("Edges provided by MainLibrary")
+for edge in mainlibrary.edges():
+    print(" - " + edge)
+
+# some get element definitions
+definition_edge = mainlibrary.edge("EDGE")
+definition_vertex = mainlibrary.vertex("RECTANGLE")
+
+###################################################################################################
+# File
+file = File.File("./MyDrawIOFile.drawio")
+page = file.pages()[0]
+
+# create vertices and edge, using the element definitions
+rect_01 = page.createVertex(definition_vertex)
+
+rect_02 = page.createVertex(definition_vertex)
+geometry = rect_02.geometry()
+geometry.setX(300)
+rect_02.setGeometry(geometry)
+
+page.createEdge(definition_edge, rect_01.id(), rect_02.id())
+
+file.save()
+</code></pre>
+</div>
+
                 
                 
                 
@@ -79,25 +136,8 @@
     </div>
     <a class="headerlink" href="#Libraries"></a>
     
-            <div class="docstring"><p>Singleton-Klasse zum Laden von DrawIO-Bibliotheken (xml-Dateien).
-Jede Bibliothek wird über ein eigenes <a href="./Library.html#Library">Library Objekt</a> abgebildet. Zu den in den DrawIO Bibliotheken enthaltenen Vertices und Edges werden <a href="./ElementDefinition.html#ElementDefinition">ElementDefinition</a> erstellt. Diese dienen als Vorlage für die Erstellung von Vertices und Edges, welche den Funktionen <a href="./Page.html#Page.createVertex">Page.createVertex()</a> und <a href="./Page.html#Page.createEdge">Page.createEdge()</a> übergeben werden.</p>
-</div>
-
-
-                            <div id="Libraries.__init__" class="classattr">
-                                <div class="attr function">
-            
-        <span class="name">Libraries</span><span class="signature pdoc-code condensed">()</span>
-
-        
-    </div>
-    <a class="headerlink" href="#Libraries.__init__"></a>
     
-            <div class="docstring"><p>Das Libraries Objekt wird als Singleton erstellt, da es als zentrales Objekt den Zugriff auf die Bibliotheken ermöglichen soll.</p>
-</div>
 
-
-                            </div>
                             <div id="Libraries.library" class="classattr">
                                 <div class="attr function">
             
@@ -108,7 +148,9 @@ Jede Bibliothek wird über ein eigenes <a href="./Library.html#Library">Library 
     </div>
     <a class="headerlink" href="#Libraries.library"></a>
     
-            <div class="docstring"><p>Gibt das <a href="./Library.html#Library">Library Objekte</a> mit dem Namen zurück.</p>
+            <div class="docstring"><p>Returns the <a href="./Library.html">library</a> object for the requested library.</p>
+
+<p>If there is no library for that name, None will be returned.</p>
 </div>
 
 
@@ -123,7 +165,7 @@ Jede Bibliothek wird über ein eigenes <a href="./Library.html#Library">Library 
     </div>
     <a class="headerlink" href="#Libraries.libraries"></a>
     
-            <div class="docstring"><p>Gibt eine Liste der <a href="./Library.html#Library">Library Objekte</a> zurück.</p>
+            <div class="docstring"><p>Returns a list of all <a href="./Library.html">library</a> objects.</p>
 </div>
 
 
@@ -138,9 +180,10 @@ Jede Bibliothek wird über ein eigenes <a href="./Library.html#Library">Library 
     </div>
     <a class="headerlink" href="#Libraries.loadLibrary"></a>
     
-            <div class="docstring"><p>Lädt die DrawIO Library-Datei, wenn diese existiert, erstellt ein <a href="./Library.html#Library">Library Objekte</a> und fügt dieses der Liste der <a href="./Libraries.html#Libraries.libraries">libraries()</a> hinzu.</p>
+            <div class="docstring"><p>Loads the draw.io library file.
+If it exists, a <a href="./Library.html">library</a> object will be created.</p>
 
-<p>Gibt True zurück, wenn die Library geladen werden konnte, ansonsten wird False ausgegeben.</p>
+<p>Returns True, if the library could be loaded, otherwise false.</p>
 </div>
 
 

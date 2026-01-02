@@ -31,6 +31,7 @@
   <li><a href="#basic-element-information">Basic element information</a></li>
   <li><a href="#parent-child-relation">Parent child relation</a></li>
   <li><a href="#the-element-content">The element content</a></li>
+  <li><a href="#labels">Labels</a></li>
 </ul>
 
 
@@ -180,7 +181,7 @@
 <li><a href="../MyPyDrawIO/Element.html#Element.value">value()</a></li>
 <li><a href="../MyPyDrawIO/Element.html#Element.setValue">setValue()</a></li>
 </ul></li>
-<li>SPECIAL VALUES
+<li>LABEL
 <ul>
 <li><a href="../MyPyDrawIO/Element.html#Element.label">label()</a></li>
 <li><a href="../MyPyDrawIO/Element.html#Element.setLabel">setLabel()</a></li>
@@ -195,7 +196,19 @@
 </ul></li>
 </ul>
 
-<p>DAS MIT DEM LABEL / VALUE HIER ALLGEMEINER ERKLÄREN!!!</p>
+<h2 id="labels">Labels</h2>
+
+<p>As described
+<a href="../MyPyDrawIO.html#mxcells-and-object">here</a>
+draw.io has a special behavior regarding the <code>value</code>and <code>label</code> within the context of mxCells and objects.
+To encapsulate this behavior, in MyPyDrawIO there are the functions</p>
+
+<ul>
+<li><a href="../MyPyDrawIO/Element.html#Element.label">label()</a></li>
+<li><a href="../MyPyDrawIO/Element.html#Element.setLabel">setLabel()</a></li>
+</ul>
+
+<p>to set and get the label of an element, even if it is a value within an mxCell.</p>
 </div>
 
                 

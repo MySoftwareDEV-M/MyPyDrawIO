@@ -26,6 +26,13 @@
             <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
                    pattern=".+" required>
 
+            <h2>Contents</h2>
+            <ul>
+  <li><a href="#attributes-and-keyvaluepairs">attributes and keyValuePairs</a></li>
+  <li><a href="#configure-styles">Configure styles</a></li>
+  <li><a href="#convinient-functions">Convinient functions</a></li>
+</ul>
+
 
 
             <h2>API Documentation</h2>
@@ -85,22 +92,7 @@
                     <h1 class="modulename">
 <a href="./../MyPyDrawIO.html">MyPyDrawIO</a><wbr>.Style    </h1>
 
-                
-                
-                
-                
-            </section>
-                <section id="Style">
-                    <div class="attr class">
-            
-    <span class="def">class</span>
-    <span class="name">Style</span><wbr>(<span class="base">builtins.dict</span>):
-
-        
-    </div>
-    <a class="headerlink" href="#Style"></a>
-    
-            <div class="docstring"><p>Represents the style of an element.</p>
+                        <div class="docstring"><p>Represents the style of an element.</p>
 
 <p>Functions of Style can be grouped by their purpose.</p>
 
@@ -152,11 +144,15 @@ Using these, you do not need to the details on the attributes, keys, and their v
 but you can just call one function with one or two parameter.</p>
 
 <ol>
-<li>Retrieve the specific style from the vertex or edge by using 
+<li>Retrieve the specific style from the vertex or edge by using </li>
+</ol>
+
 <ul>
 <li><a href="./Vertex.html#Vertex.style">Vertex : style()</a> or</li>
 <li><a href="./Edge.html#Edge.style">Edge : style()</a>.</li>
-</ul></li>
+</ul>
+
+<ol start="2">
 <li>Configure the style, using the general
 <a href="./Style.html#Style.setValue">Style : setValue()</a> function or specific functions like
 <a href="./EdgeStyle.html#EdgeStyle.setArrow">EdgeStyle : setArrow()</a>.</li>
@@ -202,11 +198,11 @@ you are welcomed to implement your own functions for specific configurations.</p
 <a href="./VertexStyle.html">vertex style</a> or <a href="./EdgeStyle.html">edge style</a>:</p>
 
 <pre><code>_way_points = {
-    "straight"                      : [None,                        None,   None],
-    "orthogonal"                    : ["orthogonalEdgeStyle",       None,   None],
-    ...
-    "elbow vertical"                : ["elbowEdgeStyle",            None,   "vertical"],
-    ...
+"straight"  : [None,None,   None],
+"orthogonal": ["orthogonalEdgeStyle",   None,   None],
+...
+"elbow vertical": ["elbowEdgeStyle",None,   "vertical"],
+...
 }
 _way_points_keys = ["edgeStyle", "curved", "elbow"]
 </code></pre>
@@ -225,10 +221,10 @@ These shall use the private functions Style.__getFormat__(...) and Style.__setFo
 and act as a wrapper around them.</p>
 
 <pre><code>def getWaypoints(self) -&gt; str:
-    return self.__getFormat__(EdgeStyle._way_points_keys, self._way_points)
+return self.__getFormat__(EdgeStyle._way_points_keys, self._way_points)
 
 def setWaypoints(self, waypoint : tuple):
-    self.__setFormat__(waypoint, EdgeStyle._way_points_keys, self._way_points)
+self.__setFormat__(waypoint, EdgeStyle._way_points_keys, self._way_points)
 </code></pre>
 
 <p>HINT:
@@ -237,14 +233,29 @@ But the functions and definitions take into respect, that arrows can be configur
 edges (start and end).</p>
 
 <pre><code>def getArrow(self, side = "end") -&gt; str:
-    if(side == "start"):
-        return self.__getFormat__(EdgeStyle._arrow_start_keys, self._arrows)
-    if(side == "end"):
-        return self.__getFormat__(EdgeStyle._arrow_end_keys, self._arrows)
+if(side == "start"):
+return self.__getFormat__(EdgeStyle._arrow_start_keys, self._arrows)
+if(side == "end"):
+return self.__getFormat__(EdgeStyle._arrow_end_keys, self._arrows)
 
 </code></pre>
 </div>
 
+                
+                
+                
+            </section>
+                <section id="Style">
+                    <div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">Style</span><wbr>(<span class="base">builtins.dict</span>):
+
+        
+    </div>
+    <a class="headerlink" href="#Style"></a>
+    
+    
 
                             <div id="Style.__init__" class="classattr">
                                 <div class="attr function">
