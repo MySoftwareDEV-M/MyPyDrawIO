@@ -1,28 +1,27 @@
-import json
+"""
+The element tree provides functionality to dump and search 
+[elements](./Element.html) of a 
+[page](./Page.html).
 
+HINT:
+You can also use the elements [dump()](./Element.html#dump) function to dump the the element tree. 
+The element tree just gathers some functionality to dump and search.
+
+## Dump
+    - [dump()](./ElementTree.html#ElementTree.dump)
+
+## Search
+    - [getElement()](./ElementTree.html#ElementTree.getElement)
+    - [getElements()](./ElementTree.html#ElementTree.getElements)
+"""
 import MyFramework.Data             as Data
 import MyFramework.Informations     as Infos
+
 import MyPyDrawIO.Edge              as Edge
 import MyPyDrawIO.Element           as Element
 import MyPyDrawIO.Vertex            as Vertex
 
 class ElementTree():
-    """
-    The element tree provides functionality to dump and search [elements](./Element.html) of a [page](./Page.html).
-    
-    BEI DEM ELEMENT TREE VERMUTLICH DAS GRUPPIEREN UNTERBRINGEN???
-
-    HINT:
-    You can also use the elements [dump()](./Element.html#dump) function to dump the the element tree. 
-    The element tree just gathers some functionality to dump and search.
-
-    ## Dump
-    - [dump()](./ElementTree.html#ElementTree.dump)
-    
-    ## Search
-    - [getElement()](./ElementTree.html#ElementTree.getElement)
-    - [getElements()](./ElementTree.html#ElementTree.getElements)
-    """
     ###############################################################################################
     # class variables
 
@@ -31,7 +30,6 @@ class ElementTree():
     #----------------------------------------------------------------------------------------------
     def __init__(self, page):
         """
-        
         """
         self.__rootElement = page.rootElement()
     

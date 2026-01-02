@@ -1,3 +1,15 @@
+"""
+EdgeStyles are derived from [Style](./Style.html).
+With respect to the Style base class, this derived class provides additional functionality related to edges.
+
+- CONNECTION OF EDGES WITH VERTICES 
+<br>The general concept is explained [here](../MyPyDrawIO/Edge.html)
+- [entry()](../MyPyDrawIO/EdgeStyle.html#EdgeStyle.entry)
+- [setEntry()](../MyPyDrawIO/EdgeStyle.html#EdgeStyle.setEntry)
+- [exit()](../MyPyDrawIO/EdgeStyle.html#EdgeStyle.exit)
+- [setExit()](../MyPyDrawIO/EdgeStyle.html#EdgeStyle.setExit)
+
+"""
 import json
 
 import MyFramework.Data             as Data
@@ -5,20 +17,8 @@ import MyPyDrawIO.Element           as Element
 import MyFramework.Informations     as Infos
 import MyPyDrawIO.Style             as Style
 
-"""
-EdgeStyles are derived from [Style](./Style.html).
-With respect to the Style base class, this derived class provides additional functionality related to edges.
 
-- CONNECTION OF EDGES WITH VERTICES 
-<br>The general concept is explained [here](../MyPyDrawIO/Edge.html)
-    - [entry()](../MyPyDrawIO/EdgeStyle.html#EdgeStyle.entry)
-    - [setEntry()](../MyPyDrawIO/EdgeStyle.html#EdgeStyle.setEntry)
-    - [exit()](../MyPyDrawIO/EdgeStyle.html#EdgeStyle.exit)
-    - [setExit()](../MyPyDrawIO/EdgeStyle.html#EdgeStyle.setExit)
-    
-"""
 class EdgeStyle(Style.Style):
-
     ###############################################################################################
     # class variables
     _arrows = {
@@ -68,6 +68,8 @@ class EdgeStyle(Style.Style):
     # private functions
     #----------------------------------------------------------------------------------------------
     def __init__(self, style):
+        """
+        """
         super().__init__(style)
 
     ###############################################################################################

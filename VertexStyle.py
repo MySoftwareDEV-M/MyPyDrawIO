@@ -1,18 +1,17 @@
-import json
+"""
+Represents the style of a vertex.
 
+Functions of Element can be grouped by their purpose.
+- CONNECTION POINTS
+    - [points()](../MyPyDrawIO/VertexStyle.html#VertexStyle.points)
+    - [setPoints()](../MyPyDrawIO/VertexStyle.html#VertexStyle.setPoints)
+"""
 import MyFramework.Data             as Data
 import MyFramework.Informations     as Infos
+
 import MyPyDrawIO.Style             as Style
 
 class VertexStyle(Style.Style):
-    """
-    Represents the style of a vertex.
-
-    Functions of Element can be grouped by their purpose.
-    - CONNECTION POINTS
-        - [points()](../MyPyDrawIO/VertexStyle.html#VertexStyle.points)
-        - [setPoints()](../MyPyDrawIO/VertexStyle.html#VertexStyle.setPoints)
-    """
     ###############################################################################################
     # class variables
 

@@ -1,13 +1,70 @@
+"""
+Libraries is a
+[singleton](https://en.wikipedia.org/wiki/Singleton_pattern)
+to load draw.io libraries (xml files).
+
+For each loaded library a
+[library](./Library.html#Library)
+object will be provided.
+These provide access to the 
+[vertices](./Vertex.html) and
+[edges](./Edge.html)
+as an
+[ElementDefinition](./ElementDefinition.html). 
+Forward them to the
+[Page.createVertex()](./Page.html#Page.createVertex) and
+[Page.createEdge()](./Page.html#Page.createEdge)
+functions.
+
+Adapt this code example to use your own libraries.
+To provide a suitable draw.io library, see
+[Creating draw.io libraries for MyPyDrawIO](../MyPyDrawIO.html#creating-drawio-libraries-for-mypydrawio).
+```
+###################################################################################################
+# Libraries
+libraries = Libraries.Libraries()
+
+# access main library
+libraries.loadLibrary("./Libraries/MainLibrary.xml")
+mainlibrary = libraries.library("MainLibrary")
+
+# print content of main library
+print("Vertices provided by MainLibrary")
+for vertex in mainlibrary.vertices():
+    print(" - " + vertex)
+
+print("Edges provided by MainLibrary")
+for edge in mainlibrary.edges():
+    print(" - " + edge)
+
+# some get element definitions
+definition_edge = mainlibrary.edge("EDGE")
+definition_vertex = mainlibrary.vertex("RECTANGLE")
+
+###################################################################################################
+# File
+file = File.File("./MyDrawIOFile.drawio")
+page = file.pages()[0]
+
+# create vertices and edge, using the element definitions
+rect_01 = page.createVertex(definition_vertex)
+
+rect_02 = page.createVertex(definition_vertex)
+geometry = rect_02.geometry()
+geometry.setX(300)
+rect_02.setGeometry(geometry)
+
+page.createEdge(definition_edge, rect_01.id(), rect_02.id())
+
+file.save()
+```
+"""
 import os
 
 import MyFramework.Informations as Infos
 import MyPyDrawIO.Library       as Library
     
 class Libraries:
-    """
-    Singleton-Klasse zum Laden von DrawIO-Bibliotheken (xml-Dateien).
-    Jede Bibliothek wird über ein eigenes [Library Objekt](./Library.html#Library) abgebildet. Zu den in den DrawIO Bibliotheken enthaltenen Vertices und Edges werden [ElementDefinition](./ElementDefinition.html#ElementDefinition) erstellt. Diese dienen als Vorlage für die Erstellung von Vertices und Edges, welche den Funktionen [Page.createVertex()](./Page.html#Page.createVertex) und [Page.createEdge()](./Page.html#Page.createEdge) übergeben werden.
-    """
     ###############################################################################################
     # class variables
     __infos     = Infos.Informations()
@@ -18,7 +75,6 @@ class Libraries:
     #----------------------------------------------------------------------------------------------
     def __new__(cls):
         """
-        Das Libraries Objekt wird als Singleton erstellt, da es als zentrales Objekt den Zugriff auf die Bibliotheken ermöglichen soll.
         """        
         if not hasattr(cls, 'instance'):
             cls.instance = super(Libraries, cls).__new__(cls)
@@ -29,7 +85,9 @@ class Libraries:
     #----------------------------------------------------------------------------------------------
     def library(self, name) -> Library.Library:
         """
-        Gibt das [Library Objekte](./Library.html#Library) mit dem Namen zurück.
+        Returns the [library](./Library.html) object for the requested library.
+
+        If there is no library for that name, None will be returned.
         """
         for library in self.__libraries:
             if(library["name"] == name):
@@ -40,16 +98,17 @@ class Libraries:
     #----------------------------------------------------------------------------------------------
     def libraries(self) -> list[Library.Library]:
         """
-        Gibt eine Liste der [Library Objekte](./Library.html#Library) zurück.
+        Returns a list of all [library](./Library.html) objects.
         """        
         return self.__libraries
     
     #----------------------------------------------------------------------------------------------
     def loadLibrary(self, filePath : str) -> bool:
         """
-        Lädt die DrawIO Library-Datei, wenn diese existiert, erstellt ein [Library Objekte](./Library.html#Library) und fügt dieses der Liste der [libraries()](./Libraries.html#Libraries.libraries) hinzu.
+        Loads the draw.io library file.
+        If it exists, a [library](./Library.html) object will be created.
 
-        Gibt True zurück, wenn die Library geladen werden konnte, ansonsten wird False ausgegeben.
+        Returns True, if the library could be loaded, otherwise false.
         """
         # 1. Check if the file exists, otherwise return with a warning
         if(not os.path.exists(filePath)):
@@ -58,7 +117,7 @@ class Libraries:
             
         # 2. Create the library object
         library = Library.Library()
-        successCode = library.load(filePath)
+        successCode = library._load(filePath)
         if(successCode):
             self.__libraries.append(library)
             

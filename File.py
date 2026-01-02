@@ -1,102 +1,99 @@
-import json
-import os
-import xmltodict
+"""
+File represents the whole draw.io file.
+You use it to manage the file and the pages within the file.
 
-import MyFramework.Informations     as Infos
-import MyFramework.DE as DE
-
-import MyPyDrawIO.Page              as Page
-
-class File(dict):
-    """
-    File represents the whole draw.io file.
-    You use it to manage the file and the pages within the file.
-
-    ## manage the file
-    Functions to create, open, and save to draw.io files using a MyPyDrawIO : File instance.
+- MANAGE THE FILE
+<br>Functions to create, open, and save to draw.io files using a MyPyDrawIO : File instance.
     - [File()](./File.html#File.__init__)
     - [open()](./File.html#File.open)
     - [save()](./File.html#File.save)
     - [saveAs()](./File.html#File.saveAs)
-    
-    ## manage the pages
-    Functions to manage the pages of the file.
+- MANAGE THE PAGES
+<br>Functions to manage the pages of the file.
     - [pages()](./File.html#File.pages)
     - [numOfPages()](./File.html#File.numOfPages)
     - [insertPage()](./File.html#File.insertPage)
     - [movePage()](./File.html#File.movePage)
     - [deletePage()](./File.html#File.deletePage)
-    
-    The order of the pages returned by [pages()](./File.html#File.pages) is the same order they
-    are shown when opening the draw.io file with a draw.io application.
-    Therefore moving or inserting the pages to specific positions is crucial.
 
-    ## Code examples
-    ### Manage the file
+The order of the pages returned by [pages()](./File.html#File.pages) is the same order they
+are shown when opening the draw.io file with a draw.io application.
+Therefore moving or inserting the pages to specific positions is crucial.
 
-    ```
-    import MyPyDrawIO.File              as File
+## Code examples
+### Manage the file
 
-    file = File.File("./MyDrawIOFile.drawio")
+```
+import MyPyDrawIO.File  as File
 
-    # do some stuff
+file = File.File("./MyDrawIOFile.drawio")
 
-    file.save() 
-    # Saves changes to "./MyDrawIOFile.drawio".
-    # If "./MyDrawIOFile.drawio" does not exist yet, it will be created.
+# do some stuff
 
-    # do some stuff
+file.save() 
+# Saves changes to "./MyDrawIOFile.drawio".
+# If "./MyDrawIOFile.drawio" does not exist yet, it will be created.
 
-    file.saveAs("./OtherFile.drawio")
-    # Saves changes to "./OtherFile.drawio", leaving "./MyDrawIOFile.drawio" unchanged.
-    # If "./OtherFile.drawio" does not exist yet, it will be created.
+# do some stuff
 
-    # do some stuff
+file.saveAs("./OtherFile.drawio")
+# Saves changes to "./OtherFile.drawio", leaving "./MyDrawIOFile.drawio" unchanged.
+# If "./OtherFile.drawio" does not exist yet, it will be created.
 
-    file.open("./AnotherFile.drawio")
-    # Saves changes to "./OtherFile.drawio".
+# do some stuff
 
-    # do some stuff
+file.open("./AnotherFile.drawio")
+# Saves changes to "./OtherFile.drawio".
 
-    file.save() 
-    # Saves changes to "./Anoriginal.drawio". 
-    # If "./AnotherFile.drawio" does not exist yet, it will be created.
-    ```
+# do some stuff
 
-    ### Manage the pages
+file.save() 
+# Saves changes to "./Anoriginal.drawio". 
+# If "./AnotherFile.drawio" does not exist yet, it will be created.
+```
 
-    ```
-    import MyPyDrawIO.File              as File
+### Manage the pages
 
-    # New file
-    file = File.File("./MyDrawIOFile.drawio")
-    print("Pages in new file:")
-    for page in file.pages():
-        print(" - " + page.name())
+```
+import MyPyDrawIO.File  as File
 
-    # First changes
-    file.insertPage("New Page A")
-    file.insertPage("New Page B", 1)
-    file.insertPage("New Page C")
-    file.deletePage(3)
+# New file
+file = File.File("./MyDrawIOFile.drawio")
+print("Pages in new file:")
+for page in file.pages():
+print(" - " + page.name())
 
-    print("")
-    print("Pages after first changes:")
-    for page in file.pages():
-        print(" - " + page.name())
+# First changes
+file.insertPage("New Page A")
+file.insertPage("New Page B", 1)
+file.insertPage("New Page C")
+file.deletePage(3)
 
-    # Second changes
-    file.movePage(0, 2)
+print("")
+print("Pages after first changes:")
+for page in file.pages():
+print(" - " + page.name())
 
-    print("")
-    print("Pages after second changes:")
-    for page in file.pages():
-        print(" - " + page.name())
+# Second changes
+file.movePage(0, 2)
 
-    print("")
-    print("Number of pages: " + str(file.numOfPages()))
-    ```
-    """
+print("")
+print("Pages after second changes:")
+for page in file.pages():
+print(" - " + page.name())
+
+print("")
+print("Number of pages: " + str(file.numOfPages()))
+```
+"""
+import os
+import xmltodict
+
+import MyFramework.Informations     as Infos
+
+import MyPyDrawIO.Page              as Page
+
+class File(dict):
     ###############################################################################################
     # class variables
 
@@ -120,13 +117,10 @@ class File(dict):
     #----------------------------------------------------------------------------------------------
     def __init__(self, filePath):
         """
-        Constructor of MyPyDrawIO : File.
-
         filePath is path to a draw.io file to be opened or created (if not existing yet).
         """
         self.__filePath     = ""
         self.__pages        = list[Page.Page]()
-        self.__infos        = Infos.Informations()
         self.__filePath     = ''
         self.__pages        = list()
 
