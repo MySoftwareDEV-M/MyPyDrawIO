@@ -1,0 +1,4 @@
+[submodule "MyFramework"]
+	path = MyFramework
+	url = https://github.com/MySoftwareDEV-M/MyFramework.git
+	branch = v1.1

@@ -1,0 +1,5 @@
+# Ignore the python environment
+./venv
+
+# Ignore the precompiled Python code
+*__pycache__
