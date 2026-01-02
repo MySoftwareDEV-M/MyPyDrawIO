@@ -26,6 +26,11 @@
             <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
                    pattern=".+" required>
 
+            <h2>Contents</h2>
+            <ul>
+  <li><a href="#todos">ToDos</a></li>
+</ul>
+
 
 
             <h2>API Documentation</h2>
@@ -76,7 +81,36 @@
                     <h1 class="modulename">
 <a href="./../MyPyDrawIO.html">MyPyDrawIO</a><wbr>.Page    </h1>
 
-                
+                        <div class="docstring"><p>Reprasentation of a draw.io page.</p>
+
+<ul>
+<li><p>MANAGE THE PAGE
+<br>Functions to manage the pages name and retrieve the pages id.</p>
+
+<ul>
+<li><a href="./Page.html#Page.__init__">Page()</a>
+<br> HINT: Your should not create pages directly, but use <a href="./File.html#File.insertPage">File.insertPage()</a> instead.</li>
+<li><a href="./Page.html#Page.id">id()</a></li>
+<li><a href="./Page.html#Page.name">name()</a></li>
+<li><a href="./Page.html#Page.setName">setName()</a></li>
+</ul></li>
+<li><p>MANAGE ELEMENTS
+<br>Functions to create and delete elements and to access the elementTree.</p>
+
+<ul>
+<li><a href="./Page.html#Page.createVertex">createVertex()</a></li>
+<li><a href="./Page.html#Page.createEdge">createEdge()</a></li>
+<li><a href="./Page.html#Page.elementTree">elementTree()</a></li>
+</ul></li>
+</ul>
+
+<h2 id="todos">ToDos</h2>
+
+<ul>
+<li>LÖSCHEN VON ELEMENTS EINBAUEN</li>
+</ul>
+</div>
+
                 
                 
                 
@@ -91,38 +125,7 @@
     </div>
     <a class="headerlink" href="#Page"></a>
     
-            <div class="docstring"><p>Reprasentation of a draw.io page.</p>
-
-<h2 id="manage-the-page">manage the page</h2>
-
-<p>Functions to manage the pages name and retrieve the pages id.</p>
-
-<ul>
-<li><a href="./Page.html#Page.__init__">Page()</a>
-<br> HINT: Your should not create pages directly, but use <a href="./File.html#File.insertPage">File.insertPage()</a> instead.</li>
-<li><a href="./Page.html#Page.id">id()</a></li>
-<li><a href="./Page.html#Page.name">name()</a></li>
-<li><a href="./Page.html#Page.setName">setName()</a></li>
-</ul>
-
-<h2 id="manage-elements-vertices-edges">manage elements (vertices &amp; edges)</h2>
-
-<p>Functions to create and delete elements and to access the elementTree.</p>
-
-<ul>
-<li><a href="./Page.html#Page.createVertex">createVertex()</a></li>
-<li><a href="./Page.html#Page.createEdge">createEdge()</a></li>
-<li><a href="./Page.html#Page.elementTree">elementTree()</a></li>
-</ul>
-
-<h2 id="todos">ToDos</h2>
-
-<ul>
-<li>LÖSCHEN VON ELEMENTS EINBAUEN</li>
-<li>Suchen von Elementen einbauen</li>
-</ul>
-</div>
-
+    
 
                             <div id="Page.__init__" class="classattr">
                                 <div class="attr function">

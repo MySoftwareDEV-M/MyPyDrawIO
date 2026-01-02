@@ -3,3 +3,6 @@
 
 # Ignore the precompiled Python code
 *__pycache__
+
+# Ignore draw.io backup files
+*.bkp

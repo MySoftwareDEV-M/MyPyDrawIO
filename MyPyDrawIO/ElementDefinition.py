@@ -1,32 +1,20 @@
-import xmltodict
-import json
-import uuid
+"""
+When loading a [Library](./Library.html#Library) the Library will create an ElementDefinition for each element within the library file as described [here](../MyPyDrawIO.html#libraries).
+The Library lists all titles of the elements. The ElementDefinitions can be retrieved by their titles.
 
-import MyFramework.Informations   as Infos
+An ElementDefinition contains the definition of a [Vertice](./Vertex.html#Vertex) or [Edge](./Edge.html#Edge).
+These elements can be simple (just one mxCell or object) or complex (a more or less big parent child structure).
+
+To create an element just forwarded the ElementDefinition to the [createVertex()](./Page.html#Page.createVertex) or [createEdge()](./Page.html#Page.createEdge) function of the Page.
+These functions will return the created elements, which can be further manipulated by you.
+Keep in mind, these elements can be complex.
+"""
+import xmltodict
+
 import MyFramework.Data           as Data
+import MyFramework.Informations   as Infos
 
 class ElementDefinition(dict):
-    """
-    When loading a [Library](./Library.html#Library) the Library will create an ElementDefinition for each element within the library file as described [here](../MyPyDrawIO.html#libraries).
-    The Library lists all titles of the elements. The ElementDefinitions can be retrieved by their titles.
-
-    An ElementDefinition contains the definition of a [Vertice](./Vertex.html#Vertex) or [Edge](./Edge.html#Edge).
-    These elements can be simple (just one mxCell or object) or complex (a more or less big parent child structure).
-    
-    To create an element just forwarded the ElementDefinition to the [createVertex()](./Page.html#Page.createVertex) or [createEdge()](./Page.html#Page.createEdge) function of the Page.
-    These functions will return the created elements, which can be further manipulated by you.
-    Keep in mind, these elements can be complex.
-
-    
-    NOCH ÜBERLEGEN, OB ICH DIESE TECHNISCHEN ERLÄUTERUNGEN HIER BEHALTE.
-    If the ElementDefinition represents a complex element with parents and children [see here](../MyPyDrawIO.html#libraries),
-    all the children are also created and added as children to the respective parent.
-
-    If the content is a xml, the xml contains the definition of the specific element only. 
-    As described [here](../MyPyDrawIO.html#parent-child-relationship) within the xml the parent child relationship 
-    is realized by references. So it is in the responsibility of the Page to setup all elements
-    with the correct parent child relationship.
-    """
     ###############################################################################################
     # class variables of Element
 

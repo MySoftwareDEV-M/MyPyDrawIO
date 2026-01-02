@@ -1,5 +1,3 @@
-from typing import cast
-
 import MyPyDrawIO.File              as File
 import MyPyDrawIO.Libraries         as Libraries
 import MyPyDrawIO.Page              as Page
@@ -12,20 +10,44 @@ import MyPyDrawIO.Points            as Points
 
 import json
 import os
-import xmltodict
-import copy
 
 ###################################################################################################
 # Libraries
 libraries = Libraries.Libraries()
-libraries.loadLibrary("./Libraries/MainLibrary.xml")
 
+# access main library
+libraries.loadLibrary("./Libraries/MainLibrary.xml")
 mainlibrary = libraries.library("MainLibrary")
+
+# print content of main library
+print("Vertices provided by MainLibrary")
+for vertex in mainlibrary.vertices():
+    print(" - " + vertex)
+
+print("Edges provided by MainLibrary")
+for edge in mainlibrary.edges():
+    print(" - " + edge)
+
+# some get element definitions
 definition_edge = mainlibrary.edge("EDGE")
-definition_list = mainlibrary.vertex("LIST")
-definition_list_item = mainlibrary.vertex("LIST ITEM")
-# for vertex in mainlibrary.vertices():
-    # print(json.dumps(vertex, indent=3))
+definition_vertex = mainlibrary.vertex("RECTANGLE")
+
+###################################################################################################
+# File
+file = File.File("./MyDrawIOFile.drawio")
+page = file.pages()[0]
+
+# create vertices and edge, using the element definitions
+rect_01 = page.createVertex(definition_vertex)
+
+rect_02 = page.createVertex(definition_vertex)
+geometry = rect_02.geometry()
+geometry.setX(300)
+rect_02.setGeometry(geometry)
+
+page.createEdge(definition_edge, rect_01.id(), rect_02.id())
+
+file.save()
 
 ###################################################################################################
 # File

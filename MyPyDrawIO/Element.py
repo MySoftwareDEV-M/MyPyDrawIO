@@ -32,7 +32,7 @@ Anyone using myMyPyDrawIO should not need the element constructor, as it is used
     - [propertyKeys()](../MyPyDrawIO/Element.html#Element.propertyKeys)
     - [value()](../MyPyDrawIO/Element.html#Element.value)
     - [setValue()](../MyPyDrawIO/Element.html#Element.setValue)
-- SPECIAL VALUES
+- LABEL
     - [label()](../MyPyDrawIO/Element.html#Element.label)
     - [setLabel()](../MyPyDrawIO/Element.html#Element.setLabel)
 - STYLE & GEOMETRY
@@ -42,8 +42,15 @@ Anyone using myMyPyDrawIO should not need the element constructor, as it is used
     - [style()](../MyPyDrawIO/Element.html#Element.style)
     - [setStyle()](../MyPyDrawIO/Element.html#Element.setStyle)
 
-    
-DAS MIT DEM LABEL / VALUE HIER ALLGEMEINER ERKLÄREN!!!
+## Labels
+As described
+[here](../MyPyDrawIO.html#mxcells-and-object)
+draw.io has a special behavior regarding the `value`and `label` within the context of mxCells and objects.
+To encapsulate this behavior, in MyPyDrawIO there are the functions
+- [label()](../MyPyDrawIO/Element.html#Element.label)
+- [setLabel()](../MyPyDrawIO/Element.html#Element.setLabel)
+
+to set and get the label of an element, even if it is a value within an mxCell.
 """
 
 import copy
@@ -56,7 +63,6 @@ import MyFramework.Informations     as Infos
 import MyPyDrawIO.ElementDefinition as ElementDefinition
 import MyPyDrawIO.Geometry          as Geometry
 import MyPyDrawIO.Style             as Style
-import MyPyDrawIO.Points            as Points
 
 import sys
 Element = sys.modules[__name__]

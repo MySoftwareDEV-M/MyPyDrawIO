@@ -34,6 +34,9 @@
                     <a class="class" href="#EdgeStyle">EdgeStyle</a>
                             <ul class="memberlist">
                         <li>
+                                <a class="function" href="#EdgeStyle.__init__">EdgeStyle</a>
+                        </li>
+                        <li>
                                 <a class="function" href="#EdgeStyle.entry">entry</a>
                         </li>
                         <li>
@@ -88,7 +91,19 @@
                     <h1 class="modulename">
 <a href="./../MyPyDrawIO.html">MyPyDrawIO</a><wbr>.EdgeStyle    </h1>
 
-                
+                        <div class="docstring"><p>EdgeStyles are derived from <a href="./Style.html">Style</a>.
+With respect to the Style base class, this derived class provides additional functionality related to edges.</p>
+
+<ul>
+<li>CONNECTION OF EDGES WITH VERTICES 
+<br>The general concept is explained <a href="../MyPyDrawIO/Edge.html">here</a></li>
+<li><a href="../MyPyDrawIO/EdgeStyle.html#EdgeStyle.entry">entry()</a></li>
+<li><a href="../MyPyDrawIO/EdgeStyle.html#EdgeStyle.setEntry">setEntry()</a></li>
+<li><a href="../MyPyDrawIO/EdgeStyle.html#EdgeStyle.exit">exit()</a></li>
+<li><a href="../MyPyDrawIO/EdgeStyle.html#EdgeStyle.setExit">setExit()</a></li>
+</ul>
+</div>
+
                 
                 
                 
@@ -103,152 +118,20 @@
     </div>
     <a class="headerlink" href="#EdgeStyle"></a>
     
-            <div class="docstring"><p>Represents the style of an element.</p>
+    
 
-<p>Functions of Style can be grouped by their purpose.</p>
+                            <div id="EdgeStyle.__init__" class="classattr">
+                                <div class="attr function">
+            
+        <span class="name">EdgeStyle</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">style</span></span>)</span>
 
-<ul>
-<li>CONTENT
-<ul>
-<li><a href="../MyPyDrawIO/Style.html#Style.content">content()</a></li>
-<li><a href="../MyPyDrawIO/Style.html#Style.dump">dump()</a></li>
-</ul></li>
-<li>ATTRIBUTES &amp; KEY VALUE PAIRS
-<ul>
-<li><a href="../MyPyDrawIO/Style.html#Style.attributeExists">attributeExists()</a></li>
-<li><a href="../MyPyDrawIO/Style.html#Style.attributes">attributes()</a></li>
-<li><a href="../MyPyDrawIO/Style.html#Style.deleteAttribute">deleteAttribute()</a></li>
-<li><a href="../MyPyDrawIO/Style.html#Style.deleteKey">deleteKey()</a></li>
-<li><a href="../MyPyDrawIO/Style.html#Style.keyExists">keyExists()</a></li>
-<li><a href="../MyPyDrawIO/Style.html#Style.keys">keys()</a></li>
-<li><a href="../MyPyDrawIO/Style.html#Style.value">value()</a></li>
-<li><a href="../MyPyDrawIO/Style.html#Style.setValue">setValue()</a></li>
-</ul></li>
-</ul>
+        
+    </div>
+    <a class="headerlink" href="#EdgeStyle.__init__"></a>
+    
+    
 
-<h2 id="attributes-and-keyvaluepairs">attributes and keyValuePairs</h2>
-
-<p>A style can be configured by attributes or by key value pairs.
-(I use this wording, not knowing if draw.io developer use a different wording.)</p>
-
-<p>An example for a attributes is the <code>swimlane</code> which configures a vertex to be, well, a swimlane.
-Within the style this attribute has no asigned value.</p>
-
-<p>An example for key value pairs is <code>rounded</code> which configures if the line of the vertex has rounded or sharp corners.
-Within the style you set <code>rounded = 0</code> or <code>rounded = 1</code>. Values can be more complex then just <code>0</code> or <code>1</code>.</p>
-
-<p>On the left in the image you see a vertex configured as a swimlane with no key value pair rounded or <code>rounded = 0</code>.
-On the right you see a vertex configured as a swimlane with <code>rounded = 1</code>.</p>
-
-<p><img src="data:image/png;base64,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"></p>
-
-<h2 id="configure-styles">Configure styles</h2>
-
-<p>Configure the style of an element is a three step process.
-Setting a style, can always be done directly using functions like 
-<a href="../MyPyDrawIO/Style.html#Style.setValue">setValue()</a>. 
-For some configurations convinient functions are implemented for the
-<a href="./VertexStyle.html">vertex style</a>
-and
-<a href="./EdgeStyle.html">edge style</a>.
-Using these, you do not need to the details on the attributes, keys, and their values,
-but you can just call one function with one or two parameter.</p>
-
-<ol>
-<li>Retrieve the specific style from the vertex or edge by using 
-<ul>
-<li><a href="./Vertex.html#Vertex.style">Vertex : style()</a> or</li>
-<li><a href="./Edge.html#Edge.style">Edge : style()</a>.</li>
-</ul></li>
-<li>Configure the style, using the general
-<a href="./Style.html#Style.setValue">Style : setValue()</a> function or specific functions like
-<a href="./EdgeStyle.html#EdgeStyle.setArrow">EdgeStyle : setArrow()</a>.</li>
-<li>Set the style at the vertex or edge, you retrieved it from.</li>
-</ol>
-
-<p>Example using convinient functions:</p>
-
-<pre><code>
-edgeStyle = edge.style()
-edgeStyle.setArrow("halfCircle", "start")
-edgeStyle.setArrow("openThin", "end")
-edgeStyle.setWaypoints("orthogonal vertical curved")
-# ...
-edge.setStyle(edgeStyle)
-
-</code></pre>
-
-<p>Example using direct functions, resulting in configuration achieved with <code>edgeStyle.setArrow("halfCircle", "start")</code>:</p>
-
-<pre><code>edgeStyle = edge.style()
-edgeStyle.setValue("startArrow", "halfCircle")
-edgeStyle.setValue("startFill", "0")
-edge.setStyle(edgeStyle)
-</code></pre>
-
-<h2 id="convinient-functions">Convinient functions</h2>
-
-<p>As explained above, there are convinient functions to set some configurations and 
-(as mentioned 
-<a href="../MyPyDrawIO.html#manipulating-objects-and-extending-mypydrawio-functionality">here</a>)
-you are welcomed to implement your own functions for specific configurations.</p>
-
-<p>The recommended structure for implementation consists of there parts:</p>
-
-<ol>
-<li>definition</li>
-<li>access functions for the definition</li>
-<li>get and set function to use the configurations</li>
-</ol>
-
-<p>Define the configuration as class variables within the respective
-<a href="./VertexStyle.html">vertex style</a> or <a href="./EdgeStyle.html">edge style</a>:</p>
-
-<pre><code>_way_points = {
-    "straight"                      : [None,                        None,   None],
-    "orthogonal"                    : ["orthogonalEdgeStyle",       None,   None],
-    ...
-    "elbow vertical"                : ["elbowEdgeStyle",            None,   "vertical"],
-    ...
-}
-_way_points_keys = ["edgeStyle", "curved", "elbow"]
-</code></pre>
-
-<p>Provide global access functions to these class variables:</p>
-
-<pre><code>def supported_waypoints():
-return list(EdgeStyle._way_points.keys())
-
-def supported_waypoints_keys():
-return EdgeStyle._way_points_keys
-</code></pre>
-
-<p>Provide the get and set functions.
-These shall use the private functions Style.__getFormat__(...) and Style.__setFormat__(...)
-and act as a wrapper around them.</p>
-
-<pre><code>def getWaypoints(self) -&gt; str:
-    return self.__getFormat__(EdgeStyle._way_points_keys, self._way_points)
-
-def setWaypoints(self, waypoint : tuple):
-    self.__setFormat__(waypoint, EdgeStyle._way_points_keys, self._way_points)
-</code></pre>
-
-<p>HINT:
-The same structure is applied for configuring arrows for edges.
-But the functions and definitions take into respect, that arrows can be configured for both sides of
-edges (start and end).</p>
-
-<pre><code>def getArrow(self, side = "end") -&gt; str:
-    if(side == "start"):
-        return self.__getFormat__(EdgeStyle._arrow_start_keys, self._arrows)
-    if(side == "end"):
-        return self.__getFormat__(EdgeStyle._arrow_end_keys, self._arrows)
-
-</code></pre>
-</div>
-
-
+                            </div>
                             <div id="EdgeStyle.entry" class="classattr">
                                 <div class="attr function">
             

@@ -1,15 +1,12 @@
+"""
+Represents the geometry of an element.
+"""
 import json
 
 import MyFramework.Data             as Data
 import MyFramework.Informations     as Infos
-import MyPyDrawIO.Library           as Library
-import MyPyDrawIO.ElementDefinition as ElementDefinition
-import MyPyDrawIO.Geometry          as Geometry
 
 class Geometry(dict):
-    """
-    Represents toe geometry of an element.
-    """
     ###############################################################################################
     # class variables
 

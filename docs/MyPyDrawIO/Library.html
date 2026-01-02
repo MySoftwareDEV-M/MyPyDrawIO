@@ -45,9 +45,6 @@
                         <li>
                                 <a class="function" href="#Library.edges">edges</a>
                         </li>
-                        <li>
-                                <a class="function" href="#Library.load">load</a>
-                        </li>
                 </ul>
 
             </li>
@@ -67,7 +64,17 @@
                     <h1 class="modulename">
 <a href="./../MyPyDrawIO.html">MyPyDrawIO</a><wbr>.Library    </h1>
 
-                
+                        <div class="docstring"><p>Represants a draw.io library and provides access to the 
+<a href="./Vertex.html">vertices</a> and
+<a href="./Edge.html">edges</a>
+as an
+<a href="./ElementDefinition.html">ElementDefinition</a>. 
+Forward them to the
+<a href="./Page.html#Page.createVertex">Page.createVertex()</a> and
+<a href="./Page.html#Page.createEdge">Page.createEdge()</a>
+functions.</p>
+</div>
+
                 
                 
                 
@@ -82,9 +89,7 @@
     </div>
     <a class="headerlink" href="#Library"></a>
     
-            <div class="docstring"><p>Repräsentation einer DrawIO-Bibliothek (xml-Datei). Zu den in den DrawIO Bibliotheken enthaltenen Vertices und Edges werden <a href="./ElementDefinition.html#ElementDefinition">ElementDefinition</a> erstellt. Diese dienen als Vorlage für die Erstellung von Vertices und Edges, welche den Funktionen <a href="./Page.html#Page.createVertex">Page.createVertex()</a> und <a href="./Page.html#Page.createEdge">Page.createEdge()</a> übergeben werden.</p>
-</div>
-
+    
 
                             <div id="Library.vertex" class="classattr">
                                 <div class="attr function">
@@ -96,7 +101,10 @@
     </div>
     <a class="headerlink" href="#Library.vertex"></a>
     
-            <div class="docstring"><p>Gibt eine <a href="./ElementDefinition.html#ElementDefinition">ElementDefinition</a> für die Erstellung eines <a href="./Vertex.html#Vertex">Vertices</a> zurück.</p>
+            <div class="docstring"><p>Returns the <a href="./ElementDefinition.html">ElementDefinition</a> for the requested vertex.
+Forward this to
+<a href="./Page.html#Page.createVertex">Page.createVertex()</a>
+to create a reqpective vertex on that page.</p>
 </div>
 
 
@@ -111,7 +119,10 @@
     </div>
     <a class="headerlink" href="#Library.edge"></a>
     
-            <div class="docstring"><p>Gibt eine <a href="./ElementDefinition.html#ElementDefinition">ElementDefinition</a> für die Erstellung einer <a href="./Edge.html#Edge">Edge</a> zurück.</p>
+            <div class="docstring"><p>Returns the <a href="./ElementDefinition.html">ElementDefinition</a> for the requested edge.
+Forward this to
+<a href="./Page.html#Page.createEdge">Page.createEdge()</a>
+to create a reqpective edge on that page.</p>
 </div>
 
 
@@ -126,8 +137,9 @@
     </div>
     <a class="headerlink" href="#Library.vertices"></a>
     
-            <div class="docstring"><p>Gibt eine Liste der Namen der <a href="./ElementDefinition.html#ElementDefinition">ElementDefinition</a> für die Erstellung eines <a href="./Vertex.html#Vertex">Vertices</a> zurück.
-Über diese Namen können die <a href="./ElementDefinition.html#ElementDefinition">ElementDefinitionen</a> in der Funktion <a href="./Library.html#Library.vertex">edge()</a> abgerufen werden.</p>
+            <div class="docstring"><p>Returns a list of names of all
+<a href="./Vertex.html">vertices</a>
+provided by the library.</p>
 </div>
 
 
@@ -142,24 +154,9 @@
     </div>
     <a class="headerlink" href="#Library.edges"></a>
     
-            <div class="docstring"><p>Gibt eine Liste der Namen der <a href="./ElementDefinition.html#ElementDefinition">ElementDefinition</a> für die Erstellung einer <a href="./Edge.html#Edge">Edge</a> zurück.
-Über diese Namen können die <a href="./ElementDefinition.html#ElementDefinition">ElementDefinitionen</a> in der Funktion <a href="./Library.html#Library.edge">edge()</a> abgerufen werden.</p>
-</div>
-
-
-                            </div>
-                            <div id="Library.load" class="classattr">
-                                <div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">load</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">filePath</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">bool</span>:</span></span>
-
-        
-    </div>
-    <a class="headerlink" href="#Library.load"></a>
-    
-            <div class="docstring"><p>Lädt die in filePath angegebene DrawIO Bibliothek und
-legt zu all den in der Bibliothek enthaltenen Elemente <a href="./ElementDefinition.html#ElementDefinition">ElementDefinition</a> an.</p>
+            <div class="docstring"><p>Returns a list of names of all
+<a href="./Edge.html">edges</a>
+provided by the library.</p>
 </div>
 
 

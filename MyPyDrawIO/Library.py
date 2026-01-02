@@ -1,62 +1,42 @@
+"""
+Represants a draw.io library and provides access to the 
+[vertices](./Vertex.html) and
+[edges](./Edge.html)
+as an
+[ElementDefinition](./ElementDefinition.html). 
+Forward them to the
+[Page.createVertex()](./Page.html#Page.createVertex) and
+[Page.createEdge()](./Page.html#Page.createEdge)
+functions.
+"""
 import json
 import xmltodict
 
 import MyFramework.Informations     as Infos
-import MyFramework.DE               as DE
+
 import MyPyDrawIO.ElementDefinition as ElementDefinition
 
 
 class Library(dict):
-    """
-    Repräsentation einer DrawIO-Bibliothek (xml-Datei). Zu den in den DrawIO Bibliotheken enthaltenen Vertices und Edges werden [ElementDefinition](./ElementDefinition.html#ElementDefinition) erstellt. Diese dienen als Vorlage für die Erstellung von Vertices und Edges, welche den Funktionen [Page.createVertex()](./Page.html#Page.createVertex) und [Page.createEdge()](./Page.html#Page.createEdge) übergeben werden.
-    """
     ###############################################################################################
-    # class variables of Library
+    # class variables
     __edges     = dict()
     __vertices  = dict()
 
     ###############################################################################################
-    # private functions of Library
+    # private functions
     def __init__(self):
+        """
+        """
         self["name"] = "<no name>"
 
     ###############################################################################################
-    # public functions of Library
+    # non-public functions
     #----------------------------------------------------------------------------------------------
-    def vertex(self, title : str) -> ElementDefinition.ElementDefinition:
+    def _load(self, filePath : str) -> bool:
         """
-        Gibt eine [ElementDefinition](./ElementDefinition.html#ElementDefinition) für die Erstellung eines [Vertices](./Vertex.html#Vertex) zurück.
-        """
-        return self.__vertices[title]
-
-    #----------------------------------------------------------------------------------------------
-    def edge(self, title : str) -> ElementDefinition.ElementDefinition:
-        """
-        Gibt eine [ElementDefinition](./ElementDefinition.html#ElementDefinition) für die Erstellung einer [Edge](./Edge.html#Edge) zurück.
-        """
-        return self.__edges[title]
-
-    #----------------------------------------------------------------------------------------------
-    def vertices(self) -> list[str]:
-        """
-        Gibt eine Liste der Namen der [ElementDefinition](./ElementDefinition.html#ElementDefinition) für die Erstellung eines [Vertices](./Vertex.html#Vertex) zurück.
-        Über diese Namen können die [ElementDefinitionen](./ElementDefinition.html#ElementDefinition) in der Funktion [edge()](./Library.html#Library.vertex) abgerufen werden.
-        """
-        return self.__vertices.keys()
-
-    #----------------------------------------------------------------------------------------------
-    def edges(self) -> list[str]:
-        """
-        Gibt eine Liste der Namen der [ElementDefinition](./ElementDefinition.html#ElementDefinition) für die Erstellung einer [Edge](./Edge.html#Edge) zurück.
-        Über diese Namen können die [ElementDefinitionen](./ElementDefinition.html#ElementDefinition) in der Funktion [edge()](./Library.html#Library.edge) abgerufen werden.
-        """
-        return self.__edges.keys()
-
-    #----------------------------------------------------------------------------------------------
-    def load(self, filePath : str) -> bool:
-        """
-        Lädt die in filePath angegebene DrawIO Bibliothek und
-        legt zu all den in der Bibliothek enthaltenen Elemente [ElementDefinition](./ElementDefinition.html#ElementDefinition) an.
+        Loads the draw.io library file at the given filePath
+        and creates an element definition for each shape defined within that library file.
         """
         elementsWithNoTitle = 0
 
@@ -80,12 +60,7 @@ class Library(dict):
         content = json.loads(content)
 
         # ... and iterate the elements
-
-        # DEV_CNT = -1
         for elementDefinition in content:
-            # DEV_CNT += 1
-            # if( (DEV_CNT != 7) and (DEV_CNT != 7) ):
-            #     continue
 
             element = None
             try:
@@ -93,13 +68,9 @@ class Library(dict):
             except:
                 elementsWithNoTitle += 1
                 title = "No Title " + str(elementsWithNoTitle)
-            # print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-            # Infos.announceDebug("Name des Elements in der Bibliothek: " + title)
 
             element = ElementDefinition.ElementDefinition()
             success = element.parse(elementDefinition["xml"])
-            # de = DE.DE(json.dumps(element))
-            # print(de.dumps())
 
             if(success):
                 if element["type"] == "vertex":
@@ -115,6 +86,46 @@ class Library(dict):
                 Infos.announceWarning("An element within the library \"" + self["name"] + "\" could not be parsed.")
 
         return True
+
+    ###############################################################################################
+    # public functions
+    #----------------------------------------------------------------------------------------------
+    def vertex(self, title : str) -> ElementDefinition.ElementDefinition:
+        """
+        Returns the [ElementDefinition](./ElementDefinition.html) for the requested vertex.
+        Forward this to
+        [Page.createVertex()](./Page.html#Page.createVertex)
+        to create a reqpective vertex on that page.
+        """
+        return self.__vertices[title]
+
+    #----------------------------------------------------------------------------------------------
+    def edge(self, title : str) -> ElementDefinition.ElementDefinition:
+        """
+        Returns the [ElementDefinition](./ElementDefinition.html) for the requested edge.
+        Forward this to
+        [Page.createEdge()](./Page.html#Page.createEdge)
+        to create a reqpective edge on that page.
+        """
+        return self.__edges[title]
+
+    #----------------------------------------------------------------------------------------------
+    def vertices(self) -> list[str]:
+        """
+        Returns a list of names of all
+        [vertices](./Vertex.html)
+        provided by the library.
+        """
+        return self.__vertices.keys()
+
+    #----------------------------------------------------------------------------------------------
+    def edges(self) -> list[str]:
+        """
+        Returns a list of names of all
+        [edges](./Edge.html)
+        provided by the library.
+        """
+        return self.__edges.keys()
 
 ###################################################################################################
 # Public global functions / Helper functions

@@ -1,9 +1,28 @@
-import json
+"""
+Reprasentation of a draw.io page.
+
+- MANAGE THE PAGE
+<br>Functions to manage the pages name and retrieve the pages id.
+    - [Page()](./Page.html#Page.__init__)
+    <br> HINT: Your should not create pages directly, but use [File.insertPage()](./File.html#File.insertPage) instead.
+    - [id()](./Page.html#Page.id)
+    - [name()](./Page.html#Page.name)
+    - [setName()](./Page.html#Page.setName)
+
+- MANAGE ELEMENTS
+<br>Functions to create and delete elements and to access the elementTree.
+    - [createVertex()](./Page.html#Page.createVertex)
+    - [createEdge()](./Page.html#Page.createEdge)
+    - [elementTree()](./Page.html#Page.elementTree)
+
+## ToDos
+- LÖSCHEN VON ELEMENTS EINBAUEN
+"""
 import uuid
 
-import MyFramework.DE               as DE
 import MyFramework.Data             as Data
 import MyFramework.Informations     as Infos
+
 import MyPyDrawIO.Edge              as Edge
 import MyPyDrawIO.Element           as Element
 import MyPyDrawIO.ElementDefinition as ElementDefinition
@@ -12,28 +31,6 @@ import MyPyDrawIO.Library           as Library
 import MyPyDrawIO.Vertex            as Vertex
 
 class Page(dict):
-    """
-    Reprasentation of a draw.io page.
-    
-    ## manage the page
-    Functions to manage the pages name and retrieve the pages id.
-    - [Page()](./Page.html#Page.__init__)
-    <br> HINT: Your should not create pages directly, but use [File.insertPage()](./File.html#File.insertPage) instead.
-    - [id()](./Page.html#Page.id)
-    - [name()](./Page.html#Page.name)
-    - [setName()](./Page.html#Page.setName)
-
-    ## manage elements (vertices & edges)
-    Functions to create and delete elements and to access the elementTree.
-    - [createVertex()](./Page.html#Page.createVertex)
-    - [createEdge()](./Page.html#Page.createEdge)
-    - [elementTree()](./Page.html#Page.elementTree)
-
-    ## ToDos
-    - LÖSCHEN VON ELEMENTS EINBAUEN
-    - Suchen von Elementen einbauen
-    
-    """
     ###############################################################################################
     # class variables
 

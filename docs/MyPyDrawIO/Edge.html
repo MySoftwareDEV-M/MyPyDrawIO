@@ -26,6 +26,12 @@
             <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
                    pattern=".+" required>
 
+            <h2>Contents</h2>
+            <ul>
+  <li><a href="#some-vocabulary-start-end-source-target">Some vocabulary (start, end, source, target)</a></li>
+  <li><a href="#connecting-edges-to-vertices">Connecting edges to vertices</a></li>
+</ul>
+
 
 
             <h2>API Documentation</h2>
@@ -33,6 +39,9 @@
             <li>
                     <a class="class" href="#Edge">Edge</a>
                             <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#Edge.__init__">Edge</a>
+                        </li>
                         <li>
                                 <a class="function" href="#Edge.entry">entry</a>
                         </li>
@@ -82,27 +91,11 @@
                     <h1 class="modulename">
 <a href="./../MyPyDrawIO.html">MyPyDrawIO</a><wbr>.Edge    </h1>
 
-                
-                
-                
-                
-            </section>
-                <section id="Edge">
-                    <div class="attr class">
-            
-    <span class="def">class</span>
-    <span class="name">Edge</span><wbr>(<span class="base"><a href="Element.html#Element">MyPyDrawIO.Element.Element</a></span>):
-
-        
-    </div>
-    <a class="headerlink" href="#Edge"></a>
-    
-            <div class="docstring"><p>Edges are derived from <a href="./Element.html">Elements</a>.
+                        <div class="docstring"><p>Edges are derived from <a href="./Element.html">Elements</a>.
 With respect to the Element base class, this derived class provides additional functionality related to edges.</p>
 
 <ul>
-<li><p>CONNECTION OF EDGES WITH VERTICES </p>
-
+<li>CONNECTION OF EDGES WITH VERTICES 
 <ul>
 <li><a href="../MyPyDrawIO/Edge.html#Edge.source">source()</a></li>
 <li><a href="../MyPyDrawIO/Edge.html#Edge.setSource">setSource()</a></li>
@@ -113,8 +106,7 @@ With respect to the Element base class, this derived class provides additional f
 <li><a href="../MyPyDrawIO/Edge.html#Edge.entry">entry()</a></li>
 <li><a href="../MyPyDrawIO/Edge.html#Edge.setEntry">setEntry()</a></li>
 </ul></li>
-<li><p>STYLE &amp; GEOMETRY</p>
-
+<li>STYLE &amp; GEOMETRY
 <ul>
 <li><a href="../MyPyDrawIO/Edge.html#Edge.style">style()</a></li>
 <li><a href="../MyPyDrawIO/Edge.html#Edge.geometry">geometry()</a></li>
@@ -158,10 +150,10 @@ edge.setSource(sourceVertex.id())
 
 # set exit, using egde
 exit = {
-    "x" : 0.5,
-    "y" : 0.0,
-    "dx" : 0,
-    "dy" : 0
+"x" : 0.5,
+"y" : 0.0,
+"dx" : 0,
+"dy" : 0
 }
 # coordinates in dict
 edge.setExit(exit)
@@ -196,28 +188,49 @@ leading to cleaner code.</p>
 </ul>
 </div>
 
+                
+                
+                
+            </section>
+                <section id="Edge">
+                    <div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">Edge</span><wbr>(<span class="base"><a href="Element.html#Element">MyPyDrawIO.Element.Element</a></span>):
 
+        
+    </div>
+    <a class="headerlink" href="#Edge"></a>
+    
+    
+
+                            <div id="Edge.__init__" class="classattr">
+                                <div class="attr function">
+            
+        <span class="name">Edge</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">content</span><span class="p">:</span> <span class="nb">dict</span>,</span><span class="param">	<span class="n">sourceID</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">targetID</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">parent</span><span class="o">=</span><span class="kc">None</span></span>)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Edge.__init__"></a>
+    
+    
+
+                            </div>
                             <div id="Edge.entry" class="classattr">
                                 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">entry</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;list&#39;</span></span><span class="return-annotation">):</span></span>
+        <span class="name">entry</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">):</span></span>
 
         
     </div>
     <a class="headerlink" href="#Edge.entry"></a>
     
-            <div class="docstring"><p>Returns the entry point in the selected format.
-format: </p>
-
-<ul>
-<li>"list" --> list</li>
-<li>"dict" --> dictionary with keys x, y, dx, and dy.</li>
-</ul>
+            <div class="docstring"><p>Returns the entry point as list [dx, dy, x, y].</p>
 
 <p>If the entry does not exist None is returned.</p>
 
-<p>For details see description obove.</p>
+<p>For details see description above.</p>
 
 <p>This is a wraper function which just calls
 <a href="../MyPyDrawIO/EdgeStyle.html#EdgeStyle.entry">EdgeStyle entry()</a></p>
@@ -229,23 +242,17 @@ format: </p>
                                 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">exit</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;list&#39;</span></span><span class="return-annotation">):</span></span>
+        <span class="name">exit</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">):</span></span>
 
         
     </div>
     <a class="headerlink" href="#Edge.exit"></a>
     
-            <div class="docstring"><p>Returns the exit point in the selected format.
-format: </p>
-
-<ul>
-<li>"list" --> list</li>
-<li>"dict" --> dictionary with keys x, y, dx, and dy.</li>
-</ul>
+            <div class="docstring"><p>Returns the exit point as list [dx, dy, x, y].</p>
 
 <p>If the exit does not exist None is returned.</p>
 
-<p>For details see description obove.</p>
+<p>For details see description above.</p>
 
 <p>This is a wraper function which just calls
 <a href="../MyPyDrawIO/EdgeStyle.html#EdgeStyle.exit">EdgeStyle exit()</a></p>

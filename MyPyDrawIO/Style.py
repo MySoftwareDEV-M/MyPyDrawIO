@@ -1,139 +1,134 @@
-import json
+"""
+Represents the style of an element.
 
+Functions of Style can be grouped by their purpose.
+- CONTENT
+    - [content()](../MyPyDrawIO/Style.html#Style.content)
+    - [dump()](../MyPyDrawIO/Style.html#Style.dump)
+- ATTRIBUTES & KEY VALUE PAIRS
+    - [attributeExists()](../MyPyDrawIO/Style.html#Style.attributeExists)
+    - [attributes()](../MyPyDrawIO/Style.html#Style.attributes)
+    - [deleteAttribute()](../MyPyDrawIO/Style.html#Style.deleteAttribute)
+    - [deleteKey()](../MyPyDrawIO/Style.html#Style.deleteKey)
+    - [keyExists()](../MyPyDrawIO/Style.html#Style.keyExists)
+    - [keys()](../MyPyDrawIO/Style.html#Style.keys)
+    - [value()](../MyPyDrawIO/Style.html#Style.value)
+    - [setValue()](../MyPyDrawIO/Style.html#Style.setValue)
+
+## attributes and keyValuePairs
+A style can be configured by attributes or by key value pairs.
+(I use this wording, not knowing if draw.io developer use a different wording.)
+
+An example for a attributes is the `swimlane` which configures a vertex to be, well, a swimlane.
+Within the style this attribute has no asigned value.
+
+An example for key value pairs is `rounded` which configures if the line of the vertex has rounded or sharp corners.
+Within the style you set `rounded = 0` or `rounded = 1`. Values can be more complex then just `0` or `1`.
+
+On the left in the image you see a vertex configured as a swimlane with no key value pair rounded or `rounded = 0`.
+On the right you see a vertex configured as a swimlane with `rounded = 1`.
+
+<img src="./images/MyPyDrawIO-Style - Attributes and KeyValuePairs.png">
+
+## Configure styles
+Configure the style of an element is a three step process.
+Setting a style, can always be done directly using functions like 
+[setValue()](../MyPyDrawIO/Style.html#Style.setValue). 
+For some configurations convinient functions are implemented for the
+[vertex style](./VertexStyle.html)
+and
+[edge style](./EdgeStyle.html).
+Using these, you do not need to the details on the attributes, keys, and their values,
+but you can just call one function with one or two parameter.
+
+1. Retrieve the specific style from the vertex or edge by using 
+- [Vertex : style()](./Vertex.html#Vertex.style) or
+- [Edge : style()](./Edge.html#Edge.style).
+2. Configure the style, using the general
+[Style : setValue()](./Style.html#Style.setValue) function or specific functions like
+[EdgeStyle : setArrow()](./EdgeStyle.html#EdgeStyle.setArrow).
+3. Set the style at the vertex or edge, you retrieved it from.
+
+Example using convinient functions:
+```
+
+edgeStyle = edge.style()
+edgeStyle.setArrow("halfCircle", "start")
+edgeStyle.setArrow("openThin", "end")
+edgeStyle.setWaypoints("orthogonal vertical curved")
+# ...
+edge.setStyle(edgeStyle)
+
+```
+Example using direct functions, resulting in configuration achieved with `edgeStyle.setArrow("halfCircle", "start")`:
+```
+edgeStyle = edge.style()
+edgeStyle.setValue("startArrow", "halfCircle")
+edgeStyle.setValue("startFill", "0")
+edge.setStyle(edgeStyle)
+```
+
+## Convinient functions
+As explained above, there are convinient functions to set some configurations and 
+(as mentioned 
+[here](../MyPyDrawIO.html#manipulating-objects-and-extending-mypydrawio-functionality))
+you are welcomed to implement your own functions for specific configurations.
+
+The recommended structure for implementation consists of there parts:
+1. definition
+2. access functions for the definition
+3. get and set function to use the configurations
+
+Define the configuration as class variables within the respective
+[vertex style](./VertexStyle.html) or [edge style](./EdgeStyle.html):
+```
+_way_points = {
+"straight"  : [None,None,   None],
+"orthogonal": ["orthogonalEdgeStyle",   None,   None],
+...
+"elbow vertical": ["elbowEdgeStyle",None,   "vertical"],
+...
+}
+_way_points_keys = ["edgeStyle", "curved", "elbow"]
+```
+
+Provide global access functions to these class variables:
+```
+def supported_waypoints():
+return list(EdgeStyle._way_points.keys())
+
+def supported_waypoints_keys():
+return EdgeStyle._way_points_keys
+```
+
+Provide the get and set functions.
+These shall use the private functions Style.__getFormat__(...) and Style.__setFormat__(...)
+and act as a wrapper around them.
+```
+def getWaypoints(self) -> str:
+return self.__getFormat__(EdgeStyle._way_points_keys, self._way_points)
+
+def setWaypoints(self, waypoint : tuple):
+self.__setFormat__(waypoint, EdgeStyle._way_points_keys, self._way_points)
+```
+
+HINT:
+The same structure is applied for configuring arrows for edges.
+But the functions and definitions take into respect, that arrows can be configured for both sides of
+edges (start and end).
+```
+def getArrow(self, side = "end") -> str:
+if(side == "start"):
+return self.__getFormat__(EdgeStyle._arrow_start_keys, self._arrows)
+if(side == "end"):
+return self.__getFormat__(EdgeStyle._arrow_end_keys, self._arrows)
+
+```
+"""
 import MyFramework.Data             as Data
 import MyFramework.Informations     as Infos
-import MyPyDrawIO.Library           as Library
-import MyPyDrawIO.ElementDefinition as ElementDefinition
-import MyPyDrawIO.Geometry          as Geometry
 
 class Style(dict):
-    """
-    Represents the style of an element.
-
-    Functions of Style can be grouped by their purpose.
-    - CONTENT
-        - [content()](../MyPyDrawIO/Style.html#Style.content)
-        - [dump()](../MyPyDrawIO/Style.html#Style.dump)
-    - ATTRIBUTES & KEY VALUE PAIRS
-        - [attributeExists()](../MyPyDrawIO/Style.html#Style.attributeExists)
-        - [attributes()](../MyPyDrawIO/Style.html#Style.attributes)
-        - [deleteAttribute()](../MyPyDrawIO/Style.html#Style.deleteAttribute)
-        - [deleteKey()](../MyPyDrawIO/Style.html#Style.deleteKey)
-        - [keyExists()](../MyPyDrawIO/Style.html#Style.keyExists)
-        - [keys()](../MyPyDrawIO/Style.html#Style.keys)
-        - [value()](../MyPyDrawIO/Style.html#Style.value)
-        - [setValue()](../MyPyDrawIO/Style.html#Style.setValue)
-    
-    ## attributes and keyValuePairs
-    A style can be configured by attributes or by key value pairs.
-    (I use this wording, not knowing if draw.io developer use a different wording.)
-
-    An example for a attributes is the `swimlane` which configures a vertex to be, well, a swimlane.
-    Within the style this attribute has no asigned value.
-
-    An example for key value pairs is `rounded` which configures if the line of the vertex has rounded or sharp corners.
-    Within the style you set `rounded = 0` or `rounded = 1`. Values can be more complex then just `0` or `1`.
-
-    On the left in the image you see a vertex configured as a swimlane with no key value pair rounded or `rounded = 0`.
-    On the right you see a vertex configured as a swimlane with `rounded = 1`.
-
-    <img src="./images/MyPyDrawIO-Style - Attributes and KeyValuePairs.png">
-    
-    ## Configure styles
-    Configure the style of an element is a three step process.
-    Setting a style, can always be done directly using functions like 
-    [setValue()](../MyPyDrawIO/Style.html#Style.setValue). 
-    For some configurations convinient functions are implemented for the
-    [vertex style](./VertexStyle.html)
-    and
-    [edge style](./EdgeStyle.html).
-    Using these, you do not need to the details on the attributes, keys, and their values,
-    but you can just call one function with one or two parameter.
-
-    1. Retrieve the specific style from the vertex or edge by using 
-        - [Vertex : style()](./Vertex.html#Vertex.style) or
-        - [Edge : style()](./Edge.html#Edge.style).
-    2. Configure the style, using the general
-    [Style : setValue()](./Style.html#Style.setValue) function or specific functions like
-    [EdgeStyle : setArrow()](./EdgeStyle.html#EdgeStyle.setArrow).
-    3. Set the style at the vertex or edge, you retrieved it from.
-
-    Example using convinient functions:
-    ```
-    
-    edgeStyle = edge.style()
-    edgeStyle.setArrow("halfCircle", "start")
-    edgeStyle.setArrow("openThin", "end")
-    edgeStyle.setWaypoints("orthogonal vertical curved")
-    # ...
-    edge.setStyle(edgeStyle)
-
-    ```
-    Example using direct functions, resulting in configuration achieved with `edgeStyle.setArrow("halfCircle", "start")`:
-    ```
-    edgeStyle = edge.style()
-    edgeStyle.setValue("startArrow", "halfCircle")
-    edgeStyle.setValue("startFill", "0")
-    edge.setStyle(edgeStyle)
-    ```
-
-    ## Convinient functions
-    As explained above, there are convinient functions to set some configurations and 
-    (as mentioned 
-    [here](../MyPyDrawIO.html#manipulating-objects-and-extending-mypydrawio-functionality))
-    you are welcomed to implement your own functions for specific configurations.
-
-    The recommended structure for implementation consists of there parts:
-    1. definition
-    2. access functions for the definition
-    3. get and set function to use the configurations
-
-    Define the configuration as class variables within the respective
-    [vertex style](./VertexStyle.html) or [edge style](./EdgeStyle.html):
-    ```
-    _way_points = {
-        "straight"                      : [None,                        None,   None],
-        "orthogonal"                    : ["orthogonalEdgeStyle",       None,   None],
-        ...
-        "elbow vertical"                : ["elbowEdgeStyle",            None,   "vertical"],
-        ...
-    }
-    _way_points_keys = ["edgeStyle", "curved", "elbow"]
-    ```
-
-    Provide global access functions to these class variables:
-    ```
-    def supported_waypoints():
-    return list(EdgeStyle._way_points.keys())
-
-    def supported_waypoints_keys():
-    return EdgeStyle._way_points_keys
-    ```
-
-    Provide the get and set functions.
-    These shall use the private functions Style.__getFormat__(...) and Style.__setFormat__(...)
-    and act as a wrapper around them.
-    ```
-    def getWaypoints(self) -> str:
-        return self.__getFormat__(EdgeStyle._way_points_keys, self._way_points)
-    
-    def setWaypoints(self, waypoint : tuple):
-        self.__setFormat__(waypoint, EdgeStyle._way_points_keys, self._way_points)
-    ```
-
-    HINT:
-    The same structure is applied for configuring arrows for edges.
-    But the functions and definitions take into respect, that arrows can be configured for both sides of
-    edges (start and end).
-    ```
-    def getArrow(self, side = "end") -> str:
-        if(side == "start"):
-            return self.__getFormat__(EdgeStyle._arrow_start_keys, self._arrows)
-        if(side == "end"):
-            return self.__getFormat__(EdgeStyle._arrow_end_keys, self._arrows)
-    
-    ```
-    """
     ###############################################################################################
     # class variables
 

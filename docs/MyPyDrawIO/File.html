@@ -26,6 +26,11 @@
             <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
                    pattern=".+" required>
 
+            <h2>Contents</h2>
+            <ul>
+  <li><a href="#code-examples">Code examples</a></li>
+</ul>
+
 
 
             <h2>API Documentation</h2>
@@ -79,45 +84,27 @@
                     <h1 class="modulename">
 <a href="./../MyPyDrawIO.html">MyPyDrawIO</a><wbr>.File    </h1>
 
-                
-                
-                
-                
-            </section>
-                <section id="File">
-                    <div class="attr class">
-            
-    <span class="def">class</span>
-    <span class="name">File</span><wbr>(<span class="base">builtins.dict</span>):
-
-        
-    </div>
-    <a class="headerlink" href="#File"></a>
-    
-            <div class="docstring"><p>File represents the whole draw.io file.
+                        <div class="docstring"><p>File represents the whole draw.io file.
 You use it to manage the file and the pages within the file.</p>
 
-<h2 id="manage-the-file">manage the file</h2>
-
-<p>Functions to create, open, and save to draw.io files using a MyPyDrawIO : File instance.</p>
-
+<ul>
+<li>MANAGE THE FILE
+<br>Functions to create, open, and save to draw.io files using a MyPyDrawIO : File instance.
 <ul>
 <li><a href="./File.html#File.__init__">File()</a></li>
 <li><a href="./File.html#File.open">open()</a></li>
 <li><a href="./File.html#File.save">save()</a></li>
 <li><a href="./File.html#File.saveAs">saveAs()</a></li>
-</ul>
-
-<h2 id="manage-the-pages">manage the pages</h2>
-
-<p>Functions to manage the pages of the file.</p>
-
+</ul></li>
+<li>MANAGE THE PAGES
+<br>Functions to manage the pages of the file.
 <ul>
 <li><a href="./File.html#File.pages">pages()</a></li>
 <li><a href="./File.html#File.numOfPages">numOfPages()</a></li>
 <li><a href="./File.html#File.insertPage">insertPage()</a></li>
 <li><a href="./File.html#File.movePage">movePage()</a></li>
 <li><a href="./File.html#File.deletePage">deletePage()</a></li>
+</ul></li>
 </ul>
 
 <p>The order of the pages returned by <a href="./File.html#File.pages">pages()</a> is the same order they
@@ -126,9 +113,9 @@ Therefore moving or inserting the pages to specific positions is crucial.</p>
 
 <h2 id="code-examples">Code examples</h2>
 
-<h3 id="manage-the-file-2">Manage the file</h3>
+<h3 id="manage-the-file">Manage the file</h3>
 
-<pre><code>import <a href="">MyPyDrawIO.File</a>              as File
+<pre><code>import <a href="">MyPyDrawIO.File</a>  as File
 
 file = File.File("./MyDrawIOFile.drawio")
 
@@ -156,15 +143,15 @@ file.save()
 # If "./AnotherFile.drawio" does not exist yet, it will be created.
 </code></pre>
 
-<h3 id="manage-the-pages-2">Manage the pages</h3>
+<h3 id="manage-the-pages">Manage the pages</h3>
 
-<pre><code>import <a href="">MyPyDrawIO.File</a>              as File
+<pre><code>import <a href="">MyPyDrawIO.File</a>  as File
 
 # New file
 file = File.File("./MyDrawIOFile.drawio")
 print("Pages in new file:")
 for page in file.pages():
-    print(" - " + page.name())
+print(" - " + page.name())
 
 # First changes
 file.insertPage("New Page A")
@@ -175,7 +162,7 @@ file.deletePage(3)
 print("")
 print("Pages after first changes:")
 for page in file.pages():
-    print(" - " + page.name())
+print(" - " + page.name())
 
 # Second changes
 file.movePage(0, 2)
@@ -183,13 +170,28 @@ file.movePage(0, 2)
 print("")
 print("Pages after second changes:")
 for page in file.pages():
-    print(" - " + page.name())
+print(" - " + page.name())
 
 print("")
 print("Number of pages: " + str(file.numOfPages()))
 </code></pre>
 </div>
 
+                
+                
+                
+            </section>
+                <section id="File">
+                    <div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">File</span><wbr>(<span class="base">builtins.dict</span>):
+
+        
+    </div>
+    <a class="headerlink" href="#File"></a>
+    
+    
 
                             <div id="File.__init__" class="classattr">
                                 <div class="attr function">
@@ -200,9 +202,7 @@ print("Number of pages: " + str(file.numOfPages()))
     </div>
     <a class="headerlink" href="#File.__init__"></a>
     
-            <div class="docstring"><p>Constructor of MyPyDrawIO : File.</p>
-
-<p>filePath is path to a draw.io file to be opened or created (if not existing yet).</p>
+            <div class="docstring"><p>filePath is path to a draw.io file to be opened or created (if not existing yet).</p>
 </div>
 
 

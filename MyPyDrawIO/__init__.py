@@ -39,34 +39,38 @@ So for you and me, let's give some guidance:
 - Go and play:
     - [Using MyPyDrawIO](./MyPyDrawIO.html#using-mypydrawio) 
     is a good starting point to explore different use cases.
-    For use cases that require a higher level of understanding, 
-    this understanding is described in that section.
     Pages are referenced that provide concrete code examples,
     allowing you to quickly try out the use cases.
 
 # MyPyDrawIO as class & component diagram
 
 ## files, pages, vertices and edges
-draw.io files are represented [files](./MyPyDrawIO/File.html).
-Within one file there are one or more [pages](./MyPyDrawIO/Page.html).
-On each page there can be [vertices](./MyPyDrawIO/Vertex.html) and
+draw.io files are represented by
+[files](./MyPyDrawIO/File.html).
+Within one file there are one or more 
+[pages](./MyPyDrawIO/Page.html).
+On each page there can be 
+[vertices](./MyPyDrawIO/Vertex.html) and
 [edges](./MyPyDrawIO/Edge.html).
 
 <img src="./images/MyPyDrawIO-Class & Component Diagram I.png">
 
 ## elements = vertices and edges
-[Vertices](./MyPyDrawIO/Vertex.html) and [edges](./MyPyDrawIO/Edge.html) have certain things in common.
-These common things are bundeled in the [element base class](./MyPyDrawIO/Element.html#Element).
+[Vertices](./MyPyDrawIO/Vertex.html) and 
+[edges](./MyPyDrawIO/Edge.html) 
+have certain things in common.
+These common things are bundeled in the 
+[element base class](./MyPyDrawIO/Element.html).
 This base class is a pure MyPyDrawIO concept.
 
 The specific appearence and behavior of these elements can be controlled by their geometry and their style. 
 Again the specific geometries and styles of the vertices and edges have some things in common.
-Therefore there is also generalization for these. So we have
-- the [geometry base class](./MyPyDrawIO/Geometry.html#Geometry) with
+Therefore there is also a generalization for these. So we have
+- the [geometry base class](./MyPyDrawIO/Geometry.html) with
     - specific [vertex geometry](./MyPyDrawIO/VertexGeometry.html)
     - specific [edge geometry](./MyPyDrawIO/EdgeGeometry.html)
 
-- the [style base class](./MyPyDrawIO/Style.html#Style) with
+- the [style base class](./MyPyDrawIO/Style.html) with
     - specific [vertex style](./MyPyDrawIO/VertexStyle.html)
     - specific [edge style](./MyPyDrawIO/EdgeStyle.html)
 
@@ -115,7 +119,7 @@ Vertices and edges are the central elements in draw.io, since draw.io is about c
 where the elements are configured and connected in a specific way.
 There are very many configurations for these elements (text, color, styles, geometry, behavior, ...).
 MyPyDrawIO can only provide a limited set of specialized functions to use all of these features 
-but does provide a framework to allow you to extend it for your needs.
+but MyPydrawIO provides a framework to allow you to extend it for your needs.
 So you can use functions like
 [Element > dump()](./MyPyDrawIO/Element.html#Element.dump),
 [Element > keyList()](./MyPyDrawIO/Element.html#Element.keyList),
@@ -126,7 +130,7 @@ to see which keys there are and then set and manipulate them to add functionalit
 With respect to section [elements = vertices and edges](./MyPyDrawIO.html#elements-vertices-and-edges)
 there are there levels to add functionality.
 - element level, add functionality in
-    - [Vertices](./MyPyDrawIO/Vertex.html) and
+    - [vertices](./MyPyDrawIO/Vertex.html) and
     - [edges](./MyPyDrawIO/Edge.html)
 - style level, add functionality in
     - [vertex geometry](./MyPyDrawIO/VertexGeometry.html)
@@ -138,12 +142,31 @@ there are there levels to add functionality.
 ## Identifier id()
 draw.io uses identifier to identify objects like [pages](./MyPyDrawIO/Page.html#Page.id), 
 and the [elements](./MyPyDrawIO/Element.html#Element.id) ([vertex](./MyPyDrawIO/Vertex.html), and [edge](./MyPyDrawIO/Edge.html)).
-The identifiers should not be altered since they are used to create parent relationships between.
+The identifiers should not be altered since they are used to create relationships between elements.
 You can read their value and use it to search for elements or create relationships.
 
 ## File and page handling
 Handling files is straight forward.
 There are simple code examples on the [file page](./MyPyDrawIO/File.html).
+
+## Creating elements
+Acutally I have not created
+[vertices](./MyPyDrawIO/Vertex.html) or
+[edges](./MyPyDrawIO/Edge.html)
+without a libray.
+This is on my ToDo-List.
+
+Start with elements provided by a library until now.
+
+## Creating elements using libraries
+On the
+[libraries](./MyPyDrawIO/Libraries.html) 
+page you find a code example how to load a library and use its shapes to
+create vertices and edges.
+
+To provide a suitable draw.io library, see
+[Creating draw.io libraries for MyPyDrawIO](./MyPyDrawIO.html#creating-drawio-libraries-for-mypydrawio)
+below.
 
 ## Parent child relationship
 Each page provides a [rootElement](./MyPyDrawIO/Page.html#Page.rootElement).
@@ -154,7 +177,7 @@ resulting in a parent child relationship.
 
 <img src="./images/MyPyDrawIO-Parent Child Relationship.png">
 
-## Styles
+## Styles and geometries
 As already mentioned in sections
 [Manipulating objects and extending MyPyDrawIO functionality](./MyPyDrawIO.html#manipulating-objects-and-extending-mypydrawio-functionality)
 and 
@@ -163,17 +186,19 @@ there are many configurations for vertices and edges.
 
 The gerneral aspects of styles are described on the [Style](./MyPyDrawIO/Style.html) page.
 This includes
-- configuring styles for vertices and edges.
-- specifics of styles.
+- the datastructure of styles (attributes and keyValuePairs)
+- how to use a style to configure an element
+- the concept of convinient functions for styles (using and extending them)
 
 Aspects that are specific to vertices, or edges respectively are described on the pages:
 - [vertex style](./MyPyDrawIO/VertexStyle.html) or
 - [edge style](./MyPyDrawIO/EdgeStyle.html).
 
-## Geometry
-AUSSTEHEND
-AUSSTEHEND
-AUSSTEHEND
+For the geometry the same concept is implemented.
+Currently there is only a very general functionality on the base class level of the
+[geometry](./MyPyDrawIO/Geometry.html).
+The extensions with convinient functions as described on the
+[Style](./MyPyDrawIO/Style.html) page can be used for the geometry classes.
 
 ## Connecting edges with vertices
 With MyPyDrawIO you can connect edges with vertices using python. 
@@ -183,7 +208,7 @@ This is supported by connection points to provide specific coordinates as explai
 
 Further information can be found on the [points](./MyPyDrawIO/Points.html) page.
 
-## Using draw.io libraries
+## Creating draw.io libraries for MyPyDrawIO
 
 When creating libraries to be used with MyPyDrawIO I recommend to provide a title to the elements of the library.
 This is simply done by editing the library (blue arrow) and adding a title (green arrows).
@@ -224,7 +249,7 @@ MyPyDrawIO maps to the data structure in this way:
         - the style of an edge is represented by [MyPyDrawIO : EdgeStyle](./MyPyDrawIO/EdgeStyle.html)
         - the geometry of an edge is represented by [MyPyDrawIO : EdgeGeometry](./MyPyDrawIO/EdgeGeometry.html)
 
-### mxCells and object
+## mxCells and object
 In draw.io you can add data to an element (vertex or edge).
 If you do this with an element that was previously stored as a mxCell, that mxCell will now be wrapped in an object.
 
@@ -275,20 +300,11 @@ These informations are all handled by the [ElementDefinition](./MyPyDrawIO/Eleme
 MyPyDrawIO uses the python module [xmltodict](https://pypi.org/project/xmltodict/) to convert the XML structure into dictionaries and lists.
 Thanks for this module. It hepled a lot.
 
-
 # TODOS
-- DOKUMENTATION ZUR VERKNÜPFUNG VON EDGES UND VERTICES ÜBERARBEITEN!!!
-    - in MyPyDrawIO.EdgeStyle
-    - in MyPyDrawIO.doc.Connecting edges with vertices
-- FORMATE IN STYLES AUFGEHEN LASSEN
-    - anstelle der Formate deren Funktion in die Styles überführen
-- die Connection Points auf den Vertices implementieren.
-- Elemente löschen
-    - mindestens auf der Page
-    - wenn möglich auch bei dem Element selbst
-- GRUPPIERUNG erklären und eine Funktion zum Gruppieren implementieren
-- Auch ungroup auch bereitstellen (Einfach das Gruppen element löschen und die chldren an den parent der Gruppe hängen.)
-
-# AKTUELLE AUFGABEN
-
+- create plain element without using libraries
+- copy elements
+- delete elements
+    - on page level
+    - on element level
+- grouping, ungrouping
 """

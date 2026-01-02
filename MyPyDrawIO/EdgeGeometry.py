@@ -1,18 +1,14 @@
-import json
-
+"""
+EdgeGeometry are derived from [Geometry](./Geometry.html).
+With respect to the Geometry base class, this derived class provides additional functionality related to edges.
+"""
 import MyFramework.Data             as Data
-import MyPyDrawIO.Element           as Element
 import MyFramework.Informations     as Infos
+
+import MyPyDrawIO.Element           as Element
 import MyPyDrawIO.Geometry          as Geometry
 
 class EdgeGeometry(Geometry.Geometry):
-    """
-    EdgeGeometry are derived from [Geometry](./Geometry.html).
-    With respect to the Geometry base class, this derived class provides additional functionality related to edges.
-
-    - EINE FUNKTIONSGRUPPE
-        - [entry()](../MyPyDrawIO/EdgeGeometry.html#EdgeGeometry.entry)
-    """
     ###############################################################################################
     # class variables
 
