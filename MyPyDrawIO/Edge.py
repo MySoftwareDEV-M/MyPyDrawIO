@@ -89,6 +89,8 @@ import MyPyDrawIO.Element           as Element
 import MyPyDrawIO.EdgeStyle         as EdgeStyle
 import MyPyDrawIO.EdgeGeometry      as EdgeGeometry
 
+import uuid
+
 class Edge(Element.Element):
     ###############################################################################################
     # class variables
@@ -99,6 +101,23 @@ class Edge(Element.Element):
     def __init__(self, content : dict, sourceID : str = None, targetID : str = None, parent = None):
         """
         """
+        if content == None:
+            content = {
+                "@id" : str(uuid.uuid4()),
+                "@edge" : "1",
+                "@value" : "",
+                "@parent" : "1",
+                "@style" : "edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;",
+                "mxGeometry" : {
+                    "@relative" : "1",
+                    "@as" : "geometry",
+                    "mxPoint" : [
+                        {'@x':  '10', '@y': '10', '@as': 'sourcePoint'},
+                        {'@x': '100', '@y': '10', '@as': 'targetPoint'}
+                    ]
+                }
+            }
+
         super().__init__(content, parent)
 
         if(sourceID != None):

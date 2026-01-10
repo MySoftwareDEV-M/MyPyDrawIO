@@ -237,6 +237,24 @@ class Page(dict):
         """
         self["@name"] = name
 
+    #----------------------------------------------------------------------------------------------
+    def deleteElement(self, element):
+        elementTree = self.elementTree()
+        _element = None
+        if type(element) == str:
+            _element = elementTree.getElement(element)
+            if _element == None:
+                Infos.announceInfo("No element " + str(element))
+                return
+            _element.delete()
+            
+        elif type(element) == Element.Element:
+            _element = elementTree.getElement(element.id())
+            _element.delete()
+            
+        else:
+            Infos.announceInfo("No element " + str(element))
+        
 ###################################################################################################
 # Public global functions / Helper functions
     #----------------------------------------------------------------------------------------------

@@ -36,6 +36,8 @@ import MyPyDrawIO.Element           as Element
 import MyPyDrawIO.VertexGeometry    as VertexGeometry
 import MyPyDrawIO.VertexStyle       as VertexStyle
 
+import uuid
+
 class Vertex(Element.Element):
     ###############################################################################################
     # class variables
@@ -43,9 +45,25 @@ class Vertex(Element.Element):
     ###############################################################################################
     # private functions
     #----------------------------------------------------------------------------------------------
-    def __init__(self, content : dict, parent = None):
+    def __init__(self, content : dict = None, parent = None):
         """
         """
+        if content == None:
+            content = {
+                "@id" : str(uuid.uuid4()),
+                "@vertex" : "1",
+                "@value" : "",
+                "@parent" : "1",
+                "@style" : "rounded=0;whiteSpace=wrap;html=1;",
+                "mxGeometry" : {
+                    "@height" : 10,
+                    "@width" : 10,
+                    "@as" : "geometry"
+                }
+            }
+            if parent != None:
+                content["@parent"] = parent.id()
+
         super().__init__(content, parent)
 
     ###############################################################################################

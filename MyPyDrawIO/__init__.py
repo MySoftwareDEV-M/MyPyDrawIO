@@ -301,10 +301,6 @@ MyPyDrawIO uses the python module [xmltodict](https://pypi.org/project/xmltodict
 Thanks for this module. It hepled a lot.
 
 # TODOS
-- create plain element without using libraries
 - copy elements
-- delete elements
-    - on page level
-    - on element level
 - grouping, ungrouping
 """
