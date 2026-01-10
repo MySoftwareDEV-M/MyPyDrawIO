@@ -139,6 +139,20 @@ class Element(dict):
 
         return keys
 
+    #----------------------------------------------------------------------------------------------
+    def _clearDictionaryEntries(self):
+        self["@id"] = None
+        self["isEdge"] = False
+        self["isObject"] = False
+        self["isVertex"] = False
+        self["parent"] = None
+
+        del self["children"]
+        del self["content"]
+
+        self["children"] = []
+        self["content"]  = {}
+    
     ###############################################################################################
     # Public functions
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -238,8 +252,8 @@ class Element(dict):
 
         child.setParent(None)
 
-    # PARENT
     #----------------------------------------------------------------------------------------------
+    # PARENT
     def parent(self):
         """
         Returns the parent of the element.
@@ -252,6 +266,53 @@ class Element(dict):
         Sets the parent of this element.
         """
         self["parent"] = parent
+
+    #----------------------------------------------------------------------------------------------
+    # DELETE
+    def delete(self):
+        """
+        Deletes this element and clears all its dictionary entries.
+
+        If the Element is the root element, all elements on this page will be deleted.
+        
+        DO NOT USE THIS ELEMENT FROM NOW ON.
+        """
+        if self.id() == "1":
+            numOfChildren = len(self.children())
+            for i in range(numOfChildren):
+                child = self.children()[0]
+                child.delete()
+        
+        else:
+            parent = self.parent()
+            if self.isVertex():
+                # Retrieve root to remove this element from source and target, if assigned
+                root = parent
+                while root.id() != "1":
+                    root = root.parent()
+                
+                # loop all edges 
+                for child in root.children():
+                    if child.containsKey("@edge"):
+                        
+                        style = child.style()
+                        # If this element is the source of that edge ...
+                        if child.containsKey("@source"):
+                            if child.value("@source") == self.id():
+                                # ... delete it as source and delete exit coordinates
+                                child.deleteKey("@source")
+                                style.setExit(None)
+                        # If this element is the target of that edge ...
+                        if child.containsKey("@target"):
+                            if child.value("@target") == self.id():
+                                # ... delete it as target and delete entry coordinates
+                                child.deleteKey("@target")
+                                style.setEntry(None)
+
+                        child.setStyle(style)
+
+            parent.removeChild(self)
+            self._clearDictionaryEntries()
 
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     # THE ELEMENT CONTENT

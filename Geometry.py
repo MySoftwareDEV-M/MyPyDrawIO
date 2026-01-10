@@ -51,10 +51,15 @@ class Geometry(dict):
         """
         print(indent + "- mxPoints")
         indent = indent + "  "
-        for mxPoint in mxPoints:
+
+        if type(mxPoints) == dict:
             print(indent + "- mxPoint")
-            for key in mxPoint.keys():
-                print(indent + "  - " + key + ": " + str(mxPoint[key]))
+            for key in mxPoints.keys():
+                print(indent + "  - " + key + ": " + str(mxPoints[key]))
+            
+        if type(mxPoints) == list:
+            for mxPoint in mxPoints:
+                print(indent + "- " + str(mxPoint))
 
     ###############################################################################################
     # Public functions

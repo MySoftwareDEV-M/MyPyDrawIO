@@ -8,11 +8,11 @@ You can also use the elements [dump()](./Element.html#dump) function to dump the
 The element tree just gathers some functionality to dump and search.
 
 ## Dump
-    - [dump()](./ElementTree.html#ElementTree.dump)
+- [dump()](./ElementTree.html#ElementTree.dump)
 
 ## Search
-    - [getElement()](./ElementTree.html#ElementTree.getElement)
-    - [getElements()](./ElementTree.html#ElementTree.getElements)
+- [getElement()](./ElementTree.html#ElementTree.getElement)
+- [getElements()](./ElementTree.html#ElementTree.getElements)
 """
 import MyFramework.Data             as Data
 import MyFramework.Informations     as Infos
