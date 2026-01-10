@@ -14,6 +14,7 @@ Reprasentation of a draw.io page.
     - [createVertex()](./Page.html#Page.createVertex)
     - [createEdge()](./Page.html#Page.createEdge)
     - [elementTree()](./Page.html#Page.elementTree)
+    - [deleteElement()](./Page.html#Page.deleteElement)
 
 ## ToDos
 - LÖSCHEN VON ELEMENTS EINBAUEN
@@ -239,6 +240,11 @@ class Page(dict):
 
     #----------------------------------------------------------------------------------------------
     def deleteElement(self, element):
+        """
+        Deletes the given element.
+
+        element can be an [Element](./Element.html) or its id.
+        """
         elementTree = self.elementTree()
         _element = None
         if type(element) == str:

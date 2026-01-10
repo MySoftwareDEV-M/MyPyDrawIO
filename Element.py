@@ -19,7 +19,8 @@ Anyone using myMyPyDrawIO should not need the element constructor, as it is used
 - PARENT
     - [parent()](../MyPyDrawIO/Element.html#Element.parent)
     - [setParent()](../MyPyDrawIO/Element.html#Element.setParent)
-    
+- DELETE
+    - [delete()](../MyPyDrawIO/Element.html#Element.delete)
 ## The element content
 - CONTENT
     - [dump()](../MyPyDrawIO/Element.html#Element.dump)
