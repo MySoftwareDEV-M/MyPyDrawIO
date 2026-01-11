@@ -301,6 +301,5 @@ MyPyDrawIO uses the python module [xmltodict](https://pypi.org/project/xmltodict
 Thanks for this module. It hepled a lot.
 
 # TODOS
-- copy elements
 - grouping, ungrouping
 """
