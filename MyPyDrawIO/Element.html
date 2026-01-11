@@ -57,6 +57,9 @@
                                 <a class="function" href="#Element.isVertex">isVertex</a>
                         </li>
                         <li>
+                                <a class="function" href="#Element.convertToObject">convertToObject</a>
+                        </li>
+                        <li>
                                 <a class="function" href="#Element.children">children</a>
                         </li>
                         <li>
@@ -84,6 +87,9 @@
                                 <a class="function" href="#Element.deleteKey">deleteKey</a>
                         </li>
                         <li>
+                                <a class="function" href="#Element.deleteProperty">deleteProperty</a>
+                        </li>
+                        <li>
                                 <a class="function" href="#Element.keyList">keyList</a>
                         </li>
                         <li>
@@ -94,6 +100,9 @@
                         </li>
                         <li>
                                 <a class="function" href="#Element.value">value</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Element.setProperty">setProperty</a>
                         </li>
                         <li>
                                 <a class="function" href="#Element.setValue">setValue</a>
@@ -148,6 +157,7 @@
 <li><a href="../MyPyDrawIO/Element.html#Element.isVertex">isVertex()</a></li>
 <li><a href="../MyPyDrawIO/Element.html#Element.isEdge">isEdge()</a></li>
 <li><a href="../MyPyDrawIO/Element.html#Element.isObject">isObject()</a></li>
+<li><a href="../MyPyDrawIO/Element.html#Element.convertToObject">convertToObject()</a></li>
 </ul>
 
 <h2 id="parent-child-relation">Parent child relation</h2>
@@ -179,12 +189,14 @@
 <li>KEY &amp; VALUE
 <ul>
 <li><a href="../MyPyDrawIO/Element.html#Element.containsKey">containsKey()</a></li>
-<li><a href="../MyPyDrawIO/Element.html#Element.deleteKey">deleteKey()</a></li>
 <li><a href="../MyPyDrawIO/Element.html#Element.keyList">keyList()</a></li>
 <li><a href="../MyPyDrawIO/Element.html#Element.keySet">keySet()</a></li>
-<li><a href="../MyPyDrawIO/Element.html#Element.propertyKeys">propertyKeys()</a></li>
 <li><a href="../MyPyDrawIO/Element.html#Element.value">value()</a></li>
 <li><a href="../MyPyDrawIO/Element.html#Element.setValue">setValue()</a></li>
+<li><a href="../MyPyDrawIO/Element.html#Element.deleteKey">deleteKey()</a></li>
+<li><a href="../MyPyDrawIO/Element.html#Element.propertyKeys">propertyKeys()</a></li>
+<li><a href="../MyPyDrawIO/Element.html#Element.setProperty">setProperty()</a></li>
+<li><a href="../MyPyDrawIO/Element.html#Element.deleteProperty">deleteProperty()</a></li>
 </ul></li>
 <li>LABEL
 <ul>
@@ -255,8 +267,6 @@ To encapsulate this behavior, in MyPyDrawIO there are the functions</p>
     <a class="headerlink" href="#Element.id"></a>
     
             <div class="docstring"><p>Returns the id of the element.</p>
-
-<p>Corresponding key: @id</p>
 </div>
 
 
@@ -272,8 +282,6 @@ To encapsulate this behavior, in MyPyDrawIO there are the functions</p>
     <a class="headerlink" href="#Element.isEdge"></a>
     
             <div class="docstring"><p>Returns if the element is an edge.</p>
-
-<p>Corresponding key: isEdge</p>
 </div>
 
 
@@ -289,8 +297,6 @@ To encapsulate this behavior, in MyPyDrawIO there are the functions</p>
     <a class="headerlink" href="#Element.isObject"></a>
     
             <div class="docstring"><p>Returns if the element is an object.</p>
-
-<p>Corresponding key: isObject</p>
 </div>
 
 
@@ -306,8 +312,21 @@ To encapsulate this behavior, in MyPyDrawIO there are the functions</p>
     <a class="headerlink" href="#Element.isVertex"></a>
     
             <div class="docstring"><p>Returns if the element is a vertex.</p>
+</div>
 
-<p>Corresponding key: isVertex</p>
+
+                            </div>
+                            <div id="Element.convertToObject" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">convertToObject</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">):</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Element.convertToObject"></a>
+    
+            <div class="docstring"><p>Converts an element to an object, if it is not already an object.</p>
 </div>
 
 
@@ -323,8 +342,6 @@ To encapsulate this behavior, in MyPyDrawIO there are the functions</p>
     <a class="headerlink" href="#Element.children"></a>
     
             <div class="docstring"><p>Returns a list of all the children of this element.</p>
-
-<p>Corresponding key: children</p>
 </div>
 
 
@@ -459,6 +476,21 @@ If no keys are selected all key value pairs are dumped.</p>
 
 
                             </div>
+                            <div id="Element.deleteProperty" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">deleteProperty</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="nb">property</span></span><span class="return-annotation">):</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Element.deleteProperty"></a>
+    
+            <div class="docstring"><p>Deletes the property (with its value) if it exists.</p>
+</div>
+
+
+                            </div>
                             <div id="Element.keyList" class="classattr">
                                 <div class="attr function">
             
@@ -521,6 +553,27 @@ See <a href="../MyPyDrawIO.html#mxcells-and-object">here</a>.</p>
     
             <div class="docstring"><p>Returns the value for the key, if it exists.
 Otherwise None will be returned.</p>
+</div>
+
+
+                            </div>
+                            <div id="Element.setProperty" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">setProperty</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="nb">property</span>, </span><span class="param"><span class="n">value</span></span><span class="return-annotation">) -> <span class="nb">bool</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Element.setProperty"></a>
+    
+            <div class="docstring"><p>If this element is an object, the property value pair 
+will be added, if it does not exist yet or the value will just be set for the property.</p>
+
+<p>If the element is NOT an object, nothing will be done and False will be returned.</p>
+
+<p>ATTENTION:
+Properties must start with @.</p>
 </div>
 
 
