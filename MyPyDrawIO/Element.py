@@ -10,7 +10,8 @@ Anyone using myMyPyDrawIO should not need the element constructor, as it is used
 - [isVertex()](../MyPyDrawIO/Element.html#Element.isVertex)
 - [isEdge()](../MyPyDrawIO/Element.html#Element.isEdge)
 - [isObject()](../MyPyDrawIO/Element.html#Element.isObject)
-    
+- [convertToObject()](../MyPyDrawIO/Element.html#Element.convertToObject)
+
 ## Parent child relation
 - CHILDREN
     - [children()](../MyPyDrawIO/Element.html#Element.children)
@@ -27,12 +28,14 @@ Anyone using myMyPyDrawIO should not need the element constructor, as it is used
     - [retrieveContent()](../MyPyDrawIO/Element.html#Element.retrieveContent)
 - KEY & VALUE
     - [containsKey()](../MyPyDrawIO/Element.html#Element.containsKey)
-    - [deleteKey()](../MyPyDrawIO/Element.html#Element.deleteKey)
     - [keyList()](../MyPyDrawIO/Element.html#Element.keyList)
     - [keySet()](../MyPyDrawIO/Element.html#Element.keySet)
-    - [propertyKeys()](../MyPyDrawIO/Element.html#Element.propertyKeys)
     - [value()](../MyPyDrawIO/Element.html#Element.value)
     - [setValue()](../MyPyDrawIO/Element.html#Element.setValue)
+    - [deleteKey()](../MyPyDrawIO/Element.html#Element.deleteKey)
+    - [propertyKeys()](../MyPyDrawIO/Element.html#Element.propertyKeys)
+    - [setProperty()](../MyPyDrawIO/Element.html#Element.setProperty)
+    - [deleteProperty()](../MyPyDrawIO/Element.html#Element.deleteProperty)
 - LABEL
     - [label()](../MyPyDrawIO/Element.html#Element.label)
     - [setLabel()](../MyPyDrawIO/Element.html#Element.setLabel)
@@ -162,8 +165,6 @@ class Element(dict):
     def id(self) -> str:
         """
         Returns the id of the element.
-
-        Corresponding key: @id
         """
         return self["@id"]
     
@@ -171,8 +172,6 @@ class Element(dict):
     def isEdge(self) -> bool:
         """
         Returns if the element is an edge.
-
-        Corresponding key: isEdge
         """
         return self["isEdge"]
 
@@ -180,8 +179,6 @@ class Element(dict):
     def isObject(self) -> bool:
         """
         Returns if the element is an object.
-
-        Corresponding key: isObject
         """
         return self["isObject"]
 
@@ -189,10 +186,28 @@ class Element(dict):
     def isVertex(self) -> bool:
         """
         Returns if the element is a vertex.
-
-        Corresponding key: isVertex
         """
         return self["isVertex"]
+    
+
+    #----------------------------------------------------------------------------------------------
+    def convertToObject(self):
+        """
+        Converts an element to an object, if it is not already an object.
+        """
+        if self.isObject():
+            return
+        mxCell = copy.deepcopy(self["content"])
+        id = copy.deepcopy(self["content"]["@id"])
+        label = copy.deepcopy(self["content"]["@value"])
+        del mxCell["@id"]
+        del mxCell["@value"]
+        self["content"] = {
+            "@label" : label,
+            "@id" : id,
+            "mxCell" : mxCell
+        }
+        self["isObject"] = True
     
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     # PARENT CHILD RELATION
@@ -201,8 +216,6 @@ class Element(dict):
     def children(self) -> list:
         """
         Returns a list of all the children of this element.
-
-        Corresponding key: children
         """
         return self["children"]
 
@@ -426,6 +439,17 @@ class Element(dict):
                 del self["content"]["mxCell"][key]
 
     #----------------------------------------------------------------------------------------------
+    def deleteProperty(self, property):
+        """
+        Deletes the property (with its value) if it exists.
+        """        
+        if not self.isObject():
+            return
+        
+        if property in self["content"]:
+            del self["content"][property]
+
+    #----------------------------------------------------------------------------------------------
     def keyList(self, flattenObject = True) -> list:
         """
         Returns a list with all keys of this node and its child nodes.
@@ -497,6 +521,28 @@ class Element(dict):
             if key in self["content"]["mxCell"]:
                 return self["content"]["mxCell"][key]
         return None
+    
+    #----------------------------------------------------------------------------------------------
+    def setProperty(self, property, value) -> bool:
+        """
+        If this element is an object, the property value pair 
+        will be added, if it does not exist yet or the value will just be set for the property.
+
+        If the element is NOT an object, nothing will be done and False will be returned.
+
+        ATTENTION:
+        Properties must start with @.
+
+        """
+        if not self.isObject():
+            return False
+        
+        if not property.startswith("@"):
+            Infos.announceError("Property must start with \"@\".\nProperty not set.")
+            return False
+        
+        self["content"][property] = value
+        return True
     
     #----------------------------------------------------------------------------------------------
     def setValue(self, key, value):

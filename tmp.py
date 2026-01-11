@@ -8,6 +8,8 @@ import MyPyDrawIO.Geometry          as Geometry
 import MyPyDrawIO.EdgeStyle         as EdgeStyle
 import MyPyDrawIO.Points            as Points
 
+import json
+
 ###################################################################################################
 # Libraries
 libraries = Libraries.Libraries()
@@ -20,29 +22,29 @@ mainlibrary = libraries.library("MainLibrary")
 # File
 fileName_open   = "./TEST Edges.xml"
 fileName_saveAs = "./TEST Edges Modified.xml"
+# fileName_open = fileName_saveAs
 
 file = File.File(fileName_open)
 page = file.pages()[0]
 root = page.rootElement()
 
-page.rootElement().dump()
-
-# vertex = Vertex.Vertex(parent=root)
-# geometry = vertex.geometry()
-# geometry.setX(100)
-# geometry.setY(100)
-# geometry.setWidth(100)
-# geometry.setHeight(100)
-# vertex.setGeometry(geometry)
-
-# style = vertex.style()
-# style.setValue("rounded", "1")
-# vertex.setStyle(style)
-
-# print("###################################")
-# vertex.dump()
-
-edge = Edge.Edge(None, parent=root)
+for element in root.children():
+    print(element.label())
+    for key in element.keys():
+        print("- " + key)
+    
+    content = element["content"]
+    for entry in content:
+        print("  > " + entry)
+    
+    if "mxCell" in content:
+        for key in content["mxCell"].keys():
+            print("    - " + key)
+    
+    if not element.isObject():
+        element.convertToObject()
+        element.setProperty("@NEU", "HALLO")
+    # element.deleteProperty("@NEU")
 
 
 file.saveAs(fileName_saveAs)
